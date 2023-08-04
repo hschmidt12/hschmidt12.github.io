@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Helen Schmidt - Portfolio</title>
+<title>Helen Schmidt - About Me</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -62,37 +60,7 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -118,7 +86,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html">
+    <a class="nav-link active" href="./about.html" aria-current="page">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
@@ -126,7 +94,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./portfolio.html" aria-current="page">
+    <a class="nav-link" href="./portfolio.html">
  <span class="menu-text">Portfolio</span></a>
   </li>  
   <li class="nav-item">
@@ -143,18 +111,18 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Data Viz">Data Viz <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Machine Learning">Machine Learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Maps">Maps <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Open Data">Open Data <span class="quarto-category-count">(4)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(5)</span></div></div></div>
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Portfolio</h1>
+<h1 class="title">About Me</h1>
 </div>
 
 
@@ -169,219 +137,13 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<p>Hello! My name is Helen Schmidt and I am a Social Psychology &amp; Quantitative Methods PhD student in the <a href="https://sites.temple.edu/sanlab/" target="_blank">Social and Affective Neuroscience Lab</a> at Temple University. Under the guidance of Dr.&nbsp;Chelsea Helion, my research focuses on the relationship between emotion and language in social contexts. I am passionate about employing a multimodal approach to my research, combining traditional behavioral and neuroimaging tools with machine learning and advanced quantitative methods.</p>
+<p>Previously, I worked as the lab coordinator in Dr.&nbsp;Maureen Ritchey’s <a href="http://www.thememolab.org/" target="_blank">Memory Modulation Lab</a> at Boston College, where I studied how retrieval strategies impacted memory for emotional information. Before that, I completed my undergraduate studies at Tufts University, where I graduated with a BS in biology in 2017. During my time at Tufts, I worked with Dr.&nbsp;Elizabeth Race in the <a href="https://tuftsiconlab.weebly.com/" target="_blank">Integrative Cognitive Neuroscience Lab</a> to investigate how attention and mind-wandering impacted memory quality. I also completed a MSc in clinical neuroscience at University College London, where I studied learning and decision-making in affective contexts.</p>
+<p>Outside of the lab, I can be found reading books, exploring new places, drinking coffee, and spending time outside. I’m also a huge <code>ggplot</code> enthusiast - you can find some of my R projects in my <a href="./portfolio.html">portfolio</a>.</p>
 
 
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Data Viz,R" data-listing-date-sort="1691121600000" data-listing-file-modified-sort="1691185888000" data-listing-reading-time-sort="5.875">
-<div class="thumbnail">
-<p><a href="./posts/2023-08-04-Generative-Art/index.html"> <img src="./posts/2023-08-04-Generative-Art/post-image.png" class="thumnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/2023-08-04-Generative-Art/index.html">
-<h3 class="no-anchor listing-title">
-Generating Art in R
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Data Viz'); return false;">
-Data Viz
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
-R
-</div>
-</div>
-<a href="./posts/2023-08-04-Generative-Art/index.html">
-<div class="listing-description">
-<p>This demo outlines easy ways to generate art in R using random parameter formulas.</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/2023-08-04-Generative-Art/index.html">
-<div class="listing-date">
-Aug 4, 2023
-</div>
-<div class="listing-author">
-Helen Schmidt
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="R,Open Data,Machine Learning" data-listing-date-sort="1686801600000" data-listing-file-modified-sort="1686786304000" data-listing-reading-time-sort="14.51">
-<div class="thumbnail">
-<p><a href="./posts/2023-06-15-Machine-Learning/index.html"> <img src="./posts/2023-06-15-Machine-Learning/penguins.png" class="thumnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/2023-06-15-Machine-Learning/index.html">
-<h3 class="no-anchor listing-title">
-Introduction to Machine Learning in R
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
-R
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Open Data'); return false;">
-Open Data
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Machine Learning'); return false;">
-Machine Learning
-</div>
-</div>
-<a href="./posts/2023-06-15-Machine-Learning/index.html">
-<div class="listing-description">
-<p>A tutorial created for the 2023 Temple University Coding Outreach Group summer workshop series.</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/2023-06-15-Machine-Learning/index.html">
-<div class="listing-date">
-Jun 15, 2023
-</div>
-<div class="listing-author">
-Helen Schmidt
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="Data Viz,R,Open Data" data-listing-date-sort="1682913600000" data-listing-file-modified-sort="1686785178000" data-listing-reading-time-sort="0.455">
-<div class="thumbnail">
-<p><a href="./posts/2023-05-01-Chart-Challenge/index.html"> <img src="./posts/2023-05-01-Chart-Challenge/final.png" class="thumnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/2023-05-01-Chart-Challenge/index.html">
-<h3 class="no-anchor listing-title">
-30 Day Chart Challenge
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Data Viz'); return false;">
-Data Viz
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
-R
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Open Data'); return false;">
-Open Data
-</div>
-</div>
-<a href="./posts/2023-05-01-Chart-Challenge/index.html">
-<div class="listing-description">
-<p>In April 2023, I took part in the #30DayChartChallenge, a month-long challenge to create creative data visualizations around a selection of topics.</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/2023-05-01-Chart-Challenge/index.html">
-<div class="listing-date">
-May 1, 2023
-</div>
-<div class="listing-author">
-Helen Schmidt
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="Maps,R,Open Data" data-listing-date-sort="1680321600000" data-listing-file-modified-sort="1686784874000" data-listing-reading-time-sort="0.405">
-<div class="thumbnail">
-<p><a href="./posts/2023-04-01-Map-Challenge/index.html"> <img src="./posts/2023-04-01-Map-Challenge/final.png" class="thumnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/2023-04-01-Map-Challenge/index.html">
-<h3 class="no-anchor listing-title">
-30 Day Map Challenge
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Maps'); return false;">
-Maps
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
-R
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Open Data'); return false;">
-Open Data
-</div>
-</div>
-<a href="./posts/2023-04-01-Map-Challenge/index.html">
-<div class="listing-description">
-<p>Throughout November 2022, I took part in the #30DayMapChallenge, a month-long challenge to create original maps using geospatial data. Check out the results!</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/2023-04-01-Map-Challenge/index.html">
-<div class="listing-date">
-Apr 1, 2023
-</div>
-<div class="listing-author">
-Helen Schmidt
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="Data Viz,R,Open Data" data-listing-date-sort="1678165200000" data-listing-file-modified-sort="1691165451000" data-listing-reading-time-sort="13.3">
-<div class="thumbnail">
-<p><a href="./posts/2023-03-07-Data-Viz/index.html"> <img src="./posts/2023-03-07-Data-Viz/post-image.png" class="thumnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/2023-03-07-Data-Viz/index.html">
-<h3 class="no-anchor listing-title">
-Data Visualizations in R
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Data Viz'); return false;">
-Data Viz
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
-R
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Open Data'); return false;">
-Open Data
-</div>
-</div>
-<a href="./posts/2023-03-07-Data-Viz/index.html">
-<div class="listing-description">
-<p>Using open-source data and <code>tidyverse</code> packages, this demo explores different data wrangling and plotting techniques in R.</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/2023-03-07-Data-Viz/index.html">
-<div class="listing-date">
-Mar 7, 2023
-</div>
-<div class="listing-author">
-Helen Schmidt
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

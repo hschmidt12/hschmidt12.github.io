@@ -24,7 +24,6 @@ First, I will load the packages I need. If you do not already have tidyverse pac
 ```{r warning=F, message=F}
 library(ggpubr)                 # ggplot customization
 library(Rmisc)                  # basic statistics helper
-library(reactable)              # format tables in a nice way
 library(gganimate)              # animate plots
 library(scales)                 # ggplot scale customization
 library(icons)                  # icon library
@@ -38,7 +37,7 @@ I will also read in the dataset as `df_raw` and look at the first few rows to ge
 # read in data
 df_raw <- read.csv('./data/songs_normalize.csv')
 # see first six rows of all variables
-reactable(head(df_raw), compact = T, resizable = T)
+head(df_raw)
 ```
 
 Based on the data, it looks like I have 18 variables.
@@ -116,7 +115,7 @@ artists <- df %>%                      # create new data frame
 artists <- arrange(artists, desc(SongCount))
 
 # print table of top 10 artists
-reactable(head(artists, n = 10), compact = T)
+head(artists, n = 10)
 ```
 
 <br>

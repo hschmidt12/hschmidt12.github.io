@@ -2,8 +2,6 @@
 title: "Resources"
 ---
 
-<!-- <font size="2.5"> {{< fa solid square-arrow-up-right >}} External Link </font> -->
-
 ## Applying to PhD programs in psychology
 
 -   "How applying to graduate school works" - the Sokol-Hessner Lab <a href="https://www.sokolhessnerlab.com/howapplyingworks" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none" ></a>

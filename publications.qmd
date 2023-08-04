@@ -2,47 +2,34 @@
 title: "Publications"
 ---
 
-<!-- <font size="2.5"> {{< fa solid code >}} Open Science Framework       {{< fa brands github >}} GitHub       {{< fa regular file >}} Manuscript </font> -->
-
-## Manuscripts Under Review / Preprints
+A list of my publications can also be found on [Google Scholar](https://scholar.google.com/citations?user=Iw0DI-IAAAAJ&hl=en).
 
 <font size="2.5"> *+ denotes equal contribution*       *\# denotes trainee* </font>
 
-Ulichney, V., **Schmidt, H.**, & Helion, C.
-(under review).
-Maybe the real prize is the friends we made along the way: Perceived support from friends enhances everyday emotional well-being in the U.S. and Japan.
-Under review at *Personality and Social Psychology Bulletin*, June 14, 2023.
-<a href="https://osf.io/f4kav/" class="fa-solid fa-code" target="_blank" style="text-decoration:none" ></a> <a href="https://psyarxiv.com/agc3v" class="fa-regular fa-file" target="_blank" style="text-decoration:none" ></a>
+
+## Under Review
+
+**Schmidt, H.^+^***,* Tran, S.^+#^, Medaglia, J., Ulichney, V., & Helion, C. (preprint). Conversational linguistic features predict social network learning. *PsyArXiv*.\
+[Online (preprint)](https://psyarxiv.com/fn4my/) \| [Data & Code](https://osf.io/8wqhb/)
 
 \
-Eckardt, D., Helion, C., **Schmidt, H.**, Chen, J., & Murty, V.P.
-(under review).
-Storytelling changes the structure and perceived value of event memories.
-Under review at *Cognition*, May 31, 2023.
+Eckardt, D., Helion, C., **Schmidt, H.**, Chen, J., & Murty, V.P. (preprint). Storytelling changes the structure and perceived value of event memories. *Social Science Research Network*.\
+[Online (preprint)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4481365)
 
 \
-**Schmidt, H.^+^***,* Tran, S.^+#^, Medaglia, J., Ulichney, V., & Helion, C.
-(under review).
-Conversational linguistic features predict social network learning.
-Under review at *Psychonomic Bulletin & Review*, May 15, 2023.
-<a href="https://osf.io/8wqhb/" class="fa-solid fa-code" target="_blank" style="text-decoration:none" ></a> <a href="https://psyarxiv.com/fn4my/" class="fa-regular fa-file" target="_blank" style="text-decoration:none" ></a>
+Ulichney, V., **Schmidt, H.**, & Helion, C. (preprint). Maybe the real prize is the friends we made along the way: Perceived support from friends enhances everyday emotional well-being in the U.S. and Japan. *PsyArXiv*.\
+[Online (preprint)](https://psyarxiv.com/agc3v) \| [Data & Code](https://osf.io/f4kav/)
 
 \
-Mitchell, W.J., Stasiak, J., Martinez, S.A., Cliver, K., Gregory, D.F., Reisman, S., **Schmidt, H**., Murty, V.P., & Helion, C.
-(preprint).
-Emotion regulation strategy usage in a dynamic, high-intensity context.
-<a href="https://osf.io/j5sku/" target="_blank" class="fa-solid fa-code" style ="text-decoration:none" ></a> <a href="https://psyarxiv.com/23wtz/" class="fa-regular fa-file" target="_blank" style="text-decoration:none" ></a>
+Mitchell, W.J., Stasiak, J., Martinez, S.A., Cliver, K., Gregory, D.F., Reisman, S., **Schmidt, H**., Murty, V.P., & Helion, C. (preprint). Emotion regulation strategy usage in a dynamic, high-intensity context. *PsyArXiv*.\
+[Online (preprint)](https://psyarxiv.com/23wtz/) \| [Data & Code](https://osf.io/j5sku/)
 
-## Manuscripts In Preparation
+## Unpublished
 
-**Schmidt, H.** & Helion, C.
-(in prep.).
-Quantitative methods in affective science: Recent advances, theoretical implications, and future directions.
+**Schmidt, H.** & Helion, C. (in prep.). Quantitative methods in affective science: Recent advances, theoretical implications, and future directions.
 
 \
-**Schmidt, H.**, Mitchell, W.J., & Helion, C.
-(in prep.).
-Emotion regulatory effects of emotion and content labeling in a naturalistic context.
+**Schmidt, H.**, Mitchell, W.J., & Helion, C. (in prep.). Emotion regulatory effects of emotion and content labeling in a naturalistic context.
 
 ## Selected Poster Presentations
 

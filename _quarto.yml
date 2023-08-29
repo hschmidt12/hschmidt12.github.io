@@ -16,6 +16,8 @@ website:
         text: Portfolio
       - href: resources.qmd
         text: Resources
+      - href: files/SchmidtCV-Website.pdf
+        text: CV
 
 format:
   html:

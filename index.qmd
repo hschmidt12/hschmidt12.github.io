@@ -22,6 +22,6 @@ about:
       href: https://twitter.com/_helenschmidt_
 ---
 
-<br> <br> I am a Social Psychology & Quantitative Methods PhD student who studies emotion and language in social contexts using behavioral, computational, and neuroimaging methods. I work with Dr. Chelsea Helion in the Social and Affective Neuroscience Lab at Temple University in Philadelphia.
-<br> <br> My CV is available [here](files/SchmidtCV-Website.pdf).
+<br> <br> I study emotions and social interactions using behavioral research, computational techniques, and neuroscience. I'm currently working as a PhD student with Dr. Chelsea Helion in the Social and Affective Neuroscience Lab at Temple University in Philadelphia.
+<br> <br> My CV is available [here](files/SchmidtCV-Website.pdf){target="_blank"}.
 

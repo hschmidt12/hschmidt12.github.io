@@ -51,3 +51,6 @@ NA	NA	NA	NA
 2023-08-04-17-06_seed_1806.png	1806	runif(1, -1, 1) * x_i^2 - sin(y_i^5)	runif(1, -1, 1) * y_i^3 - cos(x_i^2)
 2023-08-04-17-09_seed_7449.png	7449	runif(1, -1, 1) * x_i^2 - sin(y_i^5)	runif(1, -1, 1) * y_i^3 - cos(x_i^2)
 2023-08-04-17-11_seed_2138.png	2138	runif(1, -1, 1) * x_i^2 - sin(y_i^5)	runif(1, -1, 1) * y_i^3 - cos(x_i^2)
+2023-12-17-21-34_seed_2585.png	2585	runif(1, -1, 1) * x_i^2 - sin(y_i^5)	runif(1, -1, 1) * y_i^3 - cos(x_i^2)
+2023-12-17-21-35_seed_9311.png	9311	runif(1, -1, 1) * x_i^2 - sin(y_i^5)	runif(1, -1, 1) * y_i^3 - cos(x_i^2)
+2023-12-17-21-36_seed_8784.png	8784	runif(1, -1, 1) * x_i^2 - sin(y_i^5)	runif(1, -1, 1) * y_i^3 - cos(x_i^2)

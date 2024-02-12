@@ -1,45 +1,65 @@
 ---
 title: "Publications"
+format: 
+  html:
+    page-layout: full
 ---
 
-A list of my publications can also be found on [Google Scholar](https://scholar.google.com/citations?user=Iw0DI-IAAAAJ&hl=en).
+<!-- Formatting notes: use callouts to specify article type https://quarto.org/docs/authoring/callouts.html -->
+<!-- .callout-note = empirical -->
+<!-- .callout-caution = review -->
+<!-- .callout-important = neuro -->
+<!-- Don't include icons (icon="false") -->
 
-<font size="2.5"> *+ denotes equal contribution*       *\# denotes trainee* </font>
+If you would like to learn more about my research, there are links below to published and pre-print copies of articles as well as data and code repositories. Please email me if you cannot access any of the published materials. A full list of my work can also be found on [Google Scholar](https://scholar.google.com/citations?user=Iw0DI-IAAAAJ&hl=en). 
 
+***
 
-## Under Review
+<!-- MIDUS -->
+::: {.callout-note icon="false"}
+# Perceived Relational Support Is Associated With Everyday Positive, But Not Negative, Affectivity in a U.S. Sample
 
-**Schmidt, H.^+^***,* Tran, S.^+#^, Medaglia, J., Ulichney, V., & Helion, C. (preprint). Conversational linguistic features predict social network learning. *PsyArXiv*.\
-[Online (preprint)](https://psyarxiv.com/fn4my/) \| [Data & Code](https://osf.io/8wqhb/)
+*Personality and Social Psychology Bulletin* (2024)
 
-\
-Eckardt, D., Helion, C., **Schmidt, H.**, Chen, J., & Murty, V.P. (preprint). Storytelling changes the structure and perceived value of event memories. *Social Science Research Network*.\
-[Online (preprint)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4481365)
+Virginia Ulichney | **Helen Schmidt** | Chelsea Helion
 
-\
-Ulichney, V., **Schmidt, H.**, & Helion, C. (preprint). Maybe the real prize is the friends we made along the way: Perceived support from friends enhances everyday emotional well-being in the U.S. and Japan. *PsyArXiv*.\
-[Online (preprint)](https://psyarxiv.com/agc3v) \| [Data & Code](https://osf.io/f4kav/)
+<a href="https://journals.sagepub.com/doi/10.1177/01461672231224991" target="_blank" class="btn btn-success btn-sm" role="button">Article</a>&nbsp;<a href="https://osf.io/preprints/psyarxiv/agc3v" target="_blank" class="btn btn-success btn-sm" role="button">Pre-print</a>&nbsp;<a href="https://osf.io/f4kav/" target="_blank" class="btn btn-success btn-sm" role="button">Data + Code</a>
+:::
 
-\
-Mitchell, W.J., Stasiak, J., Martinez, S.A., Cliver, K., Gregory, D.F., Reisman, S., **Schmidt, H**., Murty, V.P., & Helion, C. (preprint). Emotion regulation strategy usage in a dynamic, high-intensity context. *PsyArXiv*.\
-[Online (preprint)](https://psyarxiv.com/23wtz/) \| [Data & Code](https://osf.io/j5sku/)
+<!-- SURVIVOR BEHAVIORAL -->
+::: {.callout-note icon="false"}
+# Conversational Linguistic Features Predict Social Network Learning
 
-## Unpublished
+*Psychonomic Bulletin & Review* (invited resubmission)
 
-**Schmidt, H.** & Helion, C. (in prep.). Quantitative methods in affective science: Recent advances, theoretical implications, and future directions.
+**Helen Schmidt** | Sophia Tran | John D. Medaglia | Virginia Ulichney | Chelsea Helion
 
-\
-**Schmidt, H.**, Mitchell, W.J., & Helion, C. (in prep.). Emotion regulatory effects of emotion and content labeling in a naturalistic context.
+<a href="https://osf.io/preprints/psyarxiv/fn4my" target="_blank" class="btn btn-success btn-sm" role="button">Pre-print</a>&nbsp;<a href="https://osf.io/8wqhb/" target="_blank" class="btn btn-success btn-sm" role="button">Data + Code</a>
+:::
 
-## Selected Poster Presentations
+<!-- STORYTELLING -->
+::: {.callout-note icon="false"}
+# Storytelling changes the content and perceived value of event memories
 
-Click [here](selected-posters.qmd){target="_blank" style="text-decoration:none"} to see a selection of my poster presentations.
-All presentations are listed on my [CV](files/SchmidtCV-Website.pdf){target="_blank" style="text-decoration:none"}.
+*Cognition* (invited resubmission)
 
-<!-- Add icon library -->
+Devlin Eckardt | Chelsea Helion | **Helen Schmidt** | Janice Chen | Vishnu Murty
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4481365" target="_blank" class="btn btn-success btn-sm" role="button">Pre-print</a>&nbsp;<a href="https://osf.io/puyf4/" target="_blank" class="btn btn-success btn-sm" role="button">Data + Code</a>
+:::
 
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<!-- FRIGHT NIGHT -->
+::: {.callout-note icon="false"}
+# Emotion regulation strategy usage in a dynamic, high-intensity context
 
-<link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+*Journal of Experimental Psychology: General* (invited resubmission)
+
+William Mitchell | Joanne Stasiak | Steven Martinez | Kate Cliver | David Gregory | **Helen Schmidt** | Vishnu Murty | Chelsea Helion
+
+<a href="https://europepmc.org/article/ppr/ppr577219" target="_blank" class="btn btn-success btn-sm" role="button">Pre-print</a>&nbsp;<a href="https://osf.io/j5sku/?view_only=89d87669e7674096819c439ca109c483" target="_blank" class="btn btn-success btn-sm" role="button">Data + Code</a>
+:::
+
+***
+
+A selection of my conference presentations can be found [here](selected-posters.qmd){target="_blank"}. All presentations are listed on my [CV](files/SchmidtCV-Website.pdf){target="_blank"}.
+

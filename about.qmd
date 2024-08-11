@@ -1,9 +1,34 @@
 ---
-title: "About"
+title: "Helen Schmidt"
+image: images/helen-schmidt-website.png
+about:
+  template: trestles
+  image-width: 250px
+  links: 
+    - icon: envelope
+      text: Email
+      href: mailto:helen_schmidt@temple.edu
+    - icon: github
+      text: GitHub
+      href: https://github.com/hschmidt12
+    - icon: mortarboard
+      text: Google Scholar
+      href: https://scholar.google.com/citations?user=Iw0DI-IAAAAJ
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/helenschmidt1/
+    # - icon: butterfly
+    #   text: Bluesky
+    #   href: https://bsky.app/profile/helen-schmidt.bsky.social
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com/_helenschmidt_
+      
 ---
 
-About this site
+<br>
+I'm a psychology Ph.D. student in the [Social and Affective Neuroscience Lab](https://sites.temple.edu/sanlab/){target="_blank"} at Temple University, specializing in social neuroscience and quantitative methods. Under the guidance of Dr. Chelsea Helion, I study social and affective cognition by employing a multimodal analytic approach that combines behavioral and neuroimaging tools with machine learning and computational methods. 
 
-```{r}
-1 + 1
-```
+I have a bachelor of science in biology from Tufts University and a master of science in clinical neuroscience from University College London. 
+
+Outside of the lab, I can be found reading books, traveling, drinking coffee, and spending time outside. I'm also a big data viz enthusiast - you can find some of my recent projects in my [portfolio](portfolio.qmd).

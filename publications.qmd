@@ -1,0 +1,103 @@
+---
+title: "Publications"
+format: 
+  html:
+    page-layout: full
+---
+
+<!-- Formatting notes: use callouts to specify article type https://quarto.org/docs/authoring/callouts.html -->
+<!-- .callout-note = empirical -->
+<!-- .callout-warning = review -->
+<!-- .callout-important = neuro -->
+<!-- Don't include icons (icon="false") -->
+
+If you would like to learn more about my research, there are links below to published and pre-print copies of articles as well as data and code repositories. A full list of my work can also be found on [Google Scholar](https://scholar.google.com/citations?user=Iw0DI-IAAAAJ&hl=en).
+
+<div class="outer">
+  <p>
+    <i class="bi bi-reception-4" style="color: #2c3d50;"></i> &nbsp; <span style="color: #2c3d50">**Empirical** &nbsp; &nbsp; </span> <i class="bi bi-share" style="color: #e74b3c;"></i> &nbsp; <span style="color: #e74b3c">**Neuroscience** &nbsp; &nbsp; </span> <i class="bi bi-journal-richtext" style="color: #f39c13;"></i> &nbsp; <span style="color: #f39c13">**Review** </span>
+  </p>
+</div>
+
+***
+
+### 2024
+
+<!-- STORYTELLING -->
+::: {.callout-note icon=false}
+# Storytelling changes the content and perceived value of event memories
+
+Devlin Eckardt, Chelsea Helion, **Helen Schmidt**, Janice Chen, & Vishnu Murty  
+*Cognition* (2024)
+
+<a href="https://www.sciencedirect.com/science/article/abs/pii/S0010027724001707" target="_blank" class="btn btn-primary btn-sm" role="button">Article</a>&nbsp;&nbsp;<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4481365" target="_blank" class="btn btn-primary btn-sm" role="button">Pre-print</a>&nbsp;&nbsp;<a href="https://osf.io/puyf4/" target="_blank" class="btn btn-primary btn-sm" role="button">Data + Code</a>
+:::
+
+<!-- NEUROECONOMICS CHAPTER -->
+::: {.callout-warning icon=false}
+# Integrated Neural Circuitry Supporting Emotion Regulation and Decision Making
+
+**Helen Schmidt** & Chelsea Helion  
+*Neuroeconomics: Core Topics and Current Directions* (forthcoming textbook chapter)
+
+<a href="https://osf.io/preprints/psyarxiv/adf3w
+" target="_blank" class="btn btn-warning btn-sm" role="button">Pre-print</a>
+:::
+
+<!-- MIDUS -->
+::: {.callout-note icon=false .font}
+# Perceived Relational Support Is Associated With Everyday Positive, But Not Negative, Affectivity in a U.S. Sample
+
+Virginia Ulichney, **Helen Schmidt**, & Chelsea Helion  
+*Personality and Social Psychology Bulletin* (2024)
+
+<a href="https://journals.sagepub.com/doi/10.1177/01461672231224991" target="_blank" class="btn btn-primary btn-sm" role="button">Article</a>&nbsp;&nbsp;<a href="https://osf.io/preprints/psyarxiv/agc3v" target="_blank" class="btn btn-primary btn-sm" role="button">Pre-print</a>&nbsp;&nbsp;<a href="https://osf.io/f4kav/" target="_blank" class="btn btn-primary btn-sm" role="button">Data + Code</a>
+:::
+
+### Under Review
+
+<!-- SURVIVOR BEHAVIORAL -->
+::: {.callout-note icon=false}
+# Conversational Linguistic Features Inform Social-Relational Inference
+
+**Helen Schmidt**, Sophia Tran, John D. Medaglia, Virginia Ulichney, William J. Mitchell, & Chelsea Helion  
+*PsyArXiv* (2024)
+
+<a href="https://osf.io/preprints/psyarxiv/fn4my" target="_blank" class="btn btn-primary btn-sm" role="button">Pre-print</a>&nbsp;&nbsp;<a href="https://osf.io/8wqhb/" target="_blank" class="btn btn-primary btn-sm" role="button">Data + Code</a>
+:::
+
+<!-- SHARED REALITY -->
+::: {.callout-note icon=false}
+# When and why does shared reality generalize?
+
+Wasita Mahaphanit, Christopher L. Welker, **Helen Schmidt**, Luke J. Chang, & Robert D. Hawkins  
+*PsyArXiv* (2024)
+
+<a href="https://osf.io/preprints/psyarxiv/g9p3e" target="_blank" class="btn btn-primary btn-sm" role="button">Pre-print</a>
+:::
+
+<!-- FRIGHT NIGHT -->
+::: {.callout-note icon=false}
+# Emotion regulation strategy use and forecasting in response to dynamic, multimodal stimuli
+
+William J. Mitchell, Joanne Stasiak, Steven Martinez, Katelyn Cliver, David Gregory, Samantha Reisman, **Helen Schmidt**, Vishnu Murty, & Chelsea Helion  
+*PsyArXiv* (2023)
+
+<a href="https://europepmc.org/article/ppr/ppr577219" target="_blank" class="btn btn-primary btn-sm" role="button">Pre-print</a>&nbsp;&nbsp;<a href="https://osf.io/j5sku/?view_only=89d87669e7674096819c439ca109c483" target="_blank" class="btn btn-primary btn-sm" role="button">Data + Code</a>
+:::
+
+### In Preparation
+
+<!-- ACTIVE VS PASSIVE -->
+::: {.callout-important icon=false}
+# Neural Effects of Continuous Ratings During Active Engagement Within a Video fMRI Paradigm
+
+William J. Mitchell, **Helen Schmidt**, & Chelsea Helion
+:::
+
+<!-- MEMORY EXPRESSION -->
+::: {.callout-note icon=false}
+# Linguistic properties of memory expression influence perceptions of veracity, despite being unrelated to memory accuracy
+
+Steven Martinez, Katelyn Cliver, William J. Mitchell, **Helen Schmidt**, Virginia Ulichney, Chelsea Helion, Jason Chein, & Vishnu Murty
+:::

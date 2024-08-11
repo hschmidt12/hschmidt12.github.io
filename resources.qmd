@@ -1,0 +1,39 @@
+---
+title: "Resources"
+format: 
+  html:
+    page-layout: full
+    link-external-newwindow: true
+---
+
+I am a member of the Applicant Team for the [Application Statement Feedback Program](https://www.asfp.io/), a volunteer-driven initiative to level the playing field in Psychology PhD program admissions. I'm also a co-director of the [Temple University Coding Outreach Group](https://tu-coding-outreach-group.github.io/), a student-led organization aiming to make computer programming approachable and achievable. You can find out more information about these two organizations, as well as links to sign up for annual programming, below!
+
+## Application Statement Feedback Program
+
+::: {layout="[1, 3]" layout-valign="center"}
+![](./images/ASFP.png){width="150px"}
+
+The Application Statement Feedback Program is a volunteer-driven program to help psychology PhD applicants write a statement that makes the strongest case for their admission, with a focus on underrepresented minority applicants and those who do not have access to mentors or resources that are "in the know" about the PhD application process. By providing support to applicants, our goal is to make the psychology PhD application process more transparent and equitable for all aspiring psychological researchers. Applicants can find more information about participating in the program [here](https://www.asfp.io/applicants). Those interested in volunteering as a statement editor can learn more about getting involved [here](https://www.asfp.io/editors). 
+:::
+
+## Coding Outreach Group
+
+::: {layout="[1, 3]" layout-valign="center"}
+![](./images/COG.png){width="150px"}
+
+The Coding Outreach Group at Temple hosts annual coding bootcamps for beginners, hands-on workshops for intermediate to advanced coders, and regular office hours for people of all coding levels to find solutions to coding problems. Our educational materials are free and publicly available so individuals within and outside of the Temple community can learn at their own pace. Click [here](https://github.com/TU-Coding-Outreach-Group/cog_summer_workshops_2023/blob/master/README.md) for more information about our most recent (2023) summer workshop series. A full repository of all materials and tutorials can be found on our [GitHub](https://github.com/TU-Coding-Outreach-Group). 
+:::
+
+## Additional resources for applying to PhD programs in psychology
+
+-   ["How applying to graduate school works"](https://www.sokolhessnerlab.com/howapplyingworks) - *the Sokol-Hessner Lab, University of Denver*
+-   [Harvard Psychology's PhD Resources and Online Tips](https://psychology.fas.harvard.edu/pro-tip) 
+-   ["Mitch's Uncensored Advice for Applying to Graduate School in Clinical Psychology"](https://mitch.web.unc.edu/wp-content/uploads/sites/4922/2017/02/MitchGradSchoolAdvice.pdf) - *Mitch Prinstein, University of North Carolina (useful for both clinical and non-clinical programs)*
+-   [Temple University's Doctoral Program in Psychology & Neuroscience](https://www.temple.edu/academics/degree-programs/psychology-phd-la-psy-phd) 
+
+## Professional development
+
+-   [Creating a simple and effective academic personal website](https://www.elsevier.com/connect/creating-a-simple-and-effective-academic-personal-website) 
+-   [American Psychological Association - Tips for Determining Authorship Credit](https://www.apa.org/science/leadership/students/authorship-paper)
+
+

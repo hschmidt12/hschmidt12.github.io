@@ -27,7 +27,7 @@ about:
 ---
 <br>
 
-<span class="wave">👋 Hi, I'm Helen!</span>
+Hi, I'm Helen!
 
 <br>
 I'm a social neuroscientist with experience working in academic and industry settings. I have a B.S. from Tufts University and an M.Sc. from University College London, and I'm currently a Ph.D. student in the Social and Affective Neuroscience Lab at Temple University in Philadelphia, PA.

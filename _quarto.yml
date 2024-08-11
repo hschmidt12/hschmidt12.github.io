@@ -1,0 +1,32 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Helen Schmidt"
+  navbar:
+    right:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
+      - href: publications.qmd
+        text: Publications
+      - href: portfolio.qmd
+        text: Portfolio
+      - href: resources.qmd
+        text: Resources
+      - href: files/SchmidtCV-Website.pdf
+        text: CV
+
+format:
+  html:
+    theme: 
+      light: flatly
+      dark: darkly
+    toc: true
+    
+
+editor: source
+
+

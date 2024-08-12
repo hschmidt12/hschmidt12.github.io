@@ -1,0 +1,18 @@
+---
+title: "30 Day Chart Challenge"
+description: "In April 2023, I took part in the #30DayChartChallenge, a month-long challenge to create creative data visualizations around a selection of topics."
+author:
+  - name: Helen Schmidt
+    url: https://helenschmidt.info
+    orcid: 0000-0003-0986-2945
+    affiliation: PhD Student @ Temple University
+    affiliation-url: https://sites.temple.edu/sanlab/ 
+date: 05-01-2023
+categories: [Data Viz, R, Open Data] # self-defined categories
+image: final.png # image to appear in portfolio landing page
+draft: false # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
+---
+
+In April 2023, I took part in the [#30DayChartChallenge](https://30daychartchallenge.org/), a community-driven event with the goal of creating unique and creative data visualizations. Every day presented a new topic, and I used R to create my charts around these topics. While I didn't complete as many days of the challenge as I would have liked, I'm happy to have had the excuse to try some new `ggplot2` visualizations. All corresponding code and individual charts can be found on my [GitHub](https://github.com/hschmidt12/30DayChartChallenge-2023). 
+
+<img src="final.png" width="800" height="800" style="float: left; position: relative; top: 0px; padding: 30px;"/>

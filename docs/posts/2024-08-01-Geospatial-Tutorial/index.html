@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Helen Schmidt">
+<meta name="dcterms.date" content="2024-08-01">
+<meta name="description" content="A tutorial created for the 2024 Temple University Coding Outreach Group summer workshop series.">
+
+<title>Helen Schmidt - Geospatial Analysis &amp; Cartography in R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Helen Schmidt</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications.html" rel="" target="">
+ <span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../portfolio.html" rel="" target="">
+ <span class="menu-text">Portfolio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resources.html" rel="" target="">
+ <span class="menu-text">Resources</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../files/Schmidt-CV.pdf" rel="" target="">
+ <span class="menu-text">CV</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#what-is-cartography" id="toc-what-is-cartography" class="nav-link" data-scroll-target="#what-is-cartography">What is cartography?</a></li>
+  <li><a href="#what-is-a-map" id="toc-what-is-a-map" class="nav-link" data-scroll-target="#what-is-a-map">What is a map?</a>
+  <ul class="collapse">
+  <li><a href="#scale" id="toc-scale" class="nav-link" data-scroll-target="#scale">1. Scale</a></li>
+  <li><a href="#coordinates" id="toc-coordinates" class="nav-link" data-scroll-target="#coordinates">2. Coordinates</a></li>
+  <li><a href="#projection" id="toc-projection" class="nav-link" data-scroll-target="#projection">3. Projection</a></li>
+  <li><a href="#symbols" id="toc-symbols" class="nav-link" data-scroll-target="#symbols">4. Symbols</a></li>
+  <li><a href="#color-and-typography" id="toc-color-and-typography" class="nav-link" data-scroll-target="#color-and-typography">5. Color and Typography</a></li>
+  </ul></li>
+  <li><a href="#what-is-geospatial-data" id="toc-what-is-geospatial-data" class="nav-link" data-scroll-target="#what-is-geospatial-data">What is geospatial data?</a></li>
+  </ul></li>
+  <li><a href="#a-basic-map" id="toc-a-basic-map" class="nav-link" data-scroll-target="#a-basic-map">1) A Basic Map</a></li>
+  <li><a href="#openstreetmap" id="toc-openstreetmap" class="nav-link" data-scroll-target="#openstreetmap">2) OpenStreetMap</a>
+  <ul class="collapse">
+  <li><a href="#now-its-your-turn" id="toc-now-its-your-turn" class="nav-link" data-scroll-target="#now-its-your-turn">Now it’s your turn!</a></li>
+  </ul></li>
+  <li><a href="#online-open-data" id="toc-online-open-data" class="nav-link" data-scroll-target="#online-open-data">3) Online Open Data</a>
+  <ul class="collapse">
+  <li><a href="#now-its-your-turn-1" id="toc-now-its-your-turn-1" class="nav-link" data-scroll-target="#now-its-your-turn-1">Now it’s your turn!</a></li>
+  </ul></li>
+  <li><a href="#elevation" id="toc-elevation" class="nav-link" data-scroll-target="#elevation">4) Elevation</a></li>
+  <li><a href="#customize" id="toc-customize" class="nav-link" data-scroll-target="#customize">Customize</a>
+  <ul class="collapse">
+  <li><a href="#openstreetmap-1" id="toc-openstreetmap-1" class="nav-link" data-scroll-target="#openstreetmap-1">OpenStreetMap</a></li>
+  <li><a href="#online-open-data-1" id="toc-online-open-data-1" class="nav-link" data-scroll-target="#online-open-data-1">Online Open Data</a></li>
+  <li><a href="#elevation-1" id="toc-elevation-1" class="nav-link" data-scroll-target="#elevation-1">Elevation</a></li>
+  </ul></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Geospatial Analysis &amp; Cartography in R</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Maps</div>
+    <div class="quarto-category">R</div>
+    <div class="quarto-category">Open Data</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    A tutorial created for the 2024 Temple University Coding Outreach Group summer workshop series.
+  </div>
+</div>
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author"><a href="https://helenschmidt.info">Helen Schmidt</a> <a href="https://orcid.org/0000-0003-0986-2945" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="https://sites.temple.edu/sanlab/">
+            PhD Student @ Temple University
+            </a>
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 1, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<section id="what-is-cartography" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-cartography">What is cartography?</h2>
+<p>Cartography is the process of creating maps. It can be thought of as a subset of geography, with the goal of communicating geographic information effectively (and creatively!).</p>
+<p>Early maps were often hand-drawn or painted, and they used information gathered from explorer observations and surveying techniques. These early maps often weren’t very accurate, but inventions like the compass, telescope, and ultimately satellite imagery greatly increased the accuracy of modern maps.</p>
+<p>At their core, maps strike a balance between capturing objective geographic information and subjective creative design. This combination makes maps both powerful sources of information and potential sources of bias. A classic example of pronounced bias is in the widespread use of the Mercator projection, which maximizes the size of land closer to the north and south poles (e.g., Europe) and minimizes land closer to the equator (e.g., Africa). This projection has been criticized for its subjective representation of regions at higher latitudes as having more power and importance, where European imperial powers were concentrated during the years of early Western mapmaking.</p>
+<p>With this in mind, there are a lot of decisions one must make as a mapmaker. In order to represent geographic information effectively and tell a data-driven story, there are certain key map elements to consider.</p>
+</section>
+<section id="what-is-a-map" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-map">What is a map?</h2>
+<p>According to the International Cartographic Association, some of the important things to consider when creating a map are as follows:</p>
+<section id="scale" class="level3">
+<h3 class="anchored" data-anchor-id="scale">1. Scale</h3>
+<p>The scale of a map reflects the ratio of map size to geographic size. This information is often presented as a guide denoting how many inches or centimeters on a map correspond to the number of feet, meters, or miles on the ground. Map scale also represents a compromise between the amount of detail and the expanse of geographic information you want to show.</p>
+</section>
+<section id="coordinates" class="level3">
+<h3 class="anchored" data-anchor-id="coordinates">2. Coordinates</h3>
+<p>In most Western maps, geographic locations will be reflected using latitude and longitude. You can think of the intersecting planes of latitude and longitude like an intersection of X and Y axes. Latitude reflects the geographic point moving east and west around the Earth, while longitude reflects the geographic point moving north and south around the Earth.</p>
+</section>
+<section id="projection" class="level3">
+<h3 class="anchored" data-anchor-id="projection">3. Projection</h3>
+<p>Because the Earth is round, and most printed maps are flat, we need to choose a suitable projection to represent the curved features of the Earth on a flat plane. As mentioned earlier, the most common is the Mercator projection, but there are a lot of options for smaller-scale maps. Some countries use specific projections and coordinate reference systems compared to others, and we can specify these reference systems and projections in digital cartography.</p>
+</section>
+<section id="symbols" class="level3">
+<h3 class="anchored" data-anchor-id="symbols">4. Symbols</h3>
+<p>Symbols are used in maps to describe certain elements depicted, while text is more often used to provide a detailed description of map contents. Depending on the information you’re trying to convey, certain shapes and symbols may be useful icons to reflect the location of public services, locations, or more abstract geospatial information.</p>
+</section>
+<section id="color-and-typography" class="level3">
+<h3 class="anchored" data-anchor-id="color-and-typography">5. Color and Typography</h3>
+<p>Arguably some of the most important features of maps are colors and typography. Color can be used to emphasize certain features and distinguish administrative boundaries, environmental features, and symbols. Selecting colors that are well-suited to the map content can easily turn a simple map into a powerful map (e.g., selecting a red color palette when creating a map of volcano eruptions). Moreover, text makes it easier for viewers to understand the map, and the size, typeface, and color can be manipulated to convey more information.</p>
+</section>
+</section>
+<section id="what-is-geospatial-data" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-geospatial-data">What is geospatial data?</h2>
+<p>How do we actually create these data-driven digital maps? We can use a type of data called <strong>geospatial data</strong>, which can be thought of location-based data containing information about objects and events that are related to physical locations on Earth’s surface. These datasets often contain locations (usually as coordinates), attributes or characteristics, and time points as they relate to a given object or event.</p>
+<p>Geospatial data is highly informative and complex, but we can leverage specialized packages in R to neatly extract the information and create professional-looking maps all using the language of the tidyverse.</p>
+</section>
+</section>
+<section id="a-basic-map" class="level1">
+<h1>1) A Basic Map</h1>
+<p>Before we dive into specialized mapmaking packages in R, I first want to demonstrate how easy it is to make a map using data and graphing features native to <code>ggplot2</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(maps)       <span class="co"># display of maps</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)    <span class="co"># repel overlapping labels</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: ggplot2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)  <span class="co"># all things tidy</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ lubridate 1.9.3     ✔ tibble    3.2.1
+✔ purrr     1.0.2     ✔ tidyr     1.3.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+✖ purrr::map()    masks maps::map()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
+<p>Let’s try making our first map!</p>
+<p>We’ll use <code>ggplot()</code> to make this and all subsequent maps. To the <code>ggplot()</code> layer, we can add a <code>geom_polygon()</code> and set our coordinates using <code>coord_cartesian()</code>. The Cartesian coordinate system is a common type of coordinate system that reflects locations of points on a plane. You may be familiar with Cartesian coordinates from geometry and other types of graphs that use an X and Y axis to display two-dimensional data points.</p>
+<p>Importantly, for this basic map, we are not using any special mapping packages. These are maps you can make exclusively using the tidyverse.</p>
+<p>We first can get USA map data from the <code>ggplot2</code> package and save this as a data frame.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get USA map data</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>usa_map <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">map_data</span>(<span class="at">map =</span> <span class="st">"usa"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># preview</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(usa_map)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7243</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(usa_map)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       long      lat group order region subregion
+1 -101.4078 29.74224     1     1   main      &lt;NA&gt;
+2 -101.3906 29.74224     1     2   main      &lt;NA&gt;
+3 -101.3620 29.65056     1     3   main      &lt;NA&gt;
+4 -101.3505 29.63911     1     4   main      &lt;NA&gt;
+5 -101.3219 29.63338     1     5   main      &lt;NA&gt;
+6 -101.3047 29.64484     1     6   main      &lt;NA&gt;</code></pre>
+</div>
+</div>
+<p>We have 7243 individual data points. The <code>long</code> variable reflects the longitude of each data point (i.e., if you think about a 2D map on an intersecting X/Y plan, the x-axis) and the <code>lat</code> variable reflects the latitude of each data point (i.e., the y-axis). We can use these variables within a <code>geom_polygon()</code> to plot the shape of the United States.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># basic (no special map packages needed!)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> usa_map, <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat)) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/create-basic-usa-map-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Woohoo, we made our first map in R! That was pretty easy!</p>
+<p>But if we think back to principles of cartography, what is a shape of the United States really telling us? We can think about it as a good base to add other data to. For example, we can add data reflecting the location of capital cities, one per state. Since we only have the contiguous United States right now, we’ll exclude Alaska and Hawaii’s capitals, Juneau and Honolulu, respectively.</p>
+<p>We’ll now use our first specialized mapmaking package called <code>maps</code> to get a dataset called <code>us.cities</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get data on US cities from maps package</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(maps<span class="sc">::</span>us.cities)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        name country.etc    pop   lat    long capital
+1 Abilene TX          TX 113888 32.45  -99.74       0
+2   Akron OH          OH 206634 41.08  -81.52       0
+3 Alameda CA          CA  70069 37.77 -122.26       0
+4  Albany GA          GA  75510 31.58  -84.18       0
+5  Albany NY          NY  93576 42.67  -73.80       2
+6  Albany OR          OR  45535 44.62 -123.09       0</code></pre>
+</div>
+</div>
+<p>We can see that this dataset includes the same latitude and longitude variables that our map uses, which makes our lives easier. As you’ll see if you start making more maps, this isn’t always the case!</p>
+<p>This dataset also contains the name of each city, the state, the population size, and a binary tag noting if the city is the state capital (2) or not (0). Let’s start by only including capital cities and excluding Honolulu and Juneau.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select only capitals (exclude alaska &amp; hawaii)</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>capitals <span class="ot">&lt;-</span> <span class="fu">subset</span>(maps<span class="sc">::</span>us.cities, capital <span class="sc">==</span> <span class="dv">2</span> <span class="sc">&amp;</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                     country.etc <span class="sc">!=</span> <span class="st">"HI"</span> <span class="sc">&amp;</span> country.etc <span class="sc">!=</span> <span class="st">"AK"</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(capitals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             name country.etc    pop   lat   long capital
+5       Albany NY          NY  93576 42.67 -73.80       2
+26   Annapolis MD          MD  36300 38.98 -76.49       2
+41     Atlanta GA          GA 424096 33.76 -84.42       2
+46     Augusta ME          ME  18626 44.32 -69.77       2
+50      Austin TX          TX 683404 30.31 -97.75       2
+58 Baton Rouge LA          LA 222217 30.45 -91.13       2</code></pre>
+</div>
+</div>
+<p>Great! We now have 48 state capital data points that we can overlay onto our U.S. map shape. I’m going to highlight these points in white to contrast them against the default polygon background color.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># show capitals on our basic map</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> usa_map, <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat)) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> capitals, <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat), <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Now we can see a point for each of the 48 capital cities! We’re getting closer to having an informative map, but unless you’re an expert in state capital geography, it’s pretty difficult to tell which cities these points reflect. We can improve this map by adding some labels, and I’ll choose to do this for the top 10 capital cities by population.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add labels for our top 10 capitals by population</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>pop <span class="ot">&lt;-</span> capitals <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">order_by =</span> pop)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># show</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>pop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               name country.etc     pop   lat    long capital
+1        Phoenix AZ          AZ 1450884 33.54 -112.07       2
+2   Indianapolis IN          IN  771725 39.78  -86.15       2
+3       Columbus OH          OH  741677 39.99  -82.99       2
+4         Austin TX          TX  683404 30.31  -97.75       2
+5         Boston MA          MA  567759 42.34  -71.02       2
+6         Denver CO          CO  556575 39.77 -104.87       2
+7  Oklahoma City OK          OK  538141 35.47  -97.51       2
+8      Nashville TN          TN  523547 36.17  -86.78       2
+9     Sacramento CA          CA  480392 38.57 -121.47       2
+10       Atlanta GA          GA  424096 33.76  -84.42       2</code></pre>
+</div>
+</div>
+<p>Now we have a new dataset containing the top 10 most populuous U.S. capitals. We can use the name variable in this dataset to create a label on our map. One of my favorite geoms to use to add labels is <code>geom_label_repel()</code>, which will draw a rectangle underneath the text and make it easier to read. The labels also get repelled from the data points and from each other!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add labels on our map</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> usa_map, <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat)) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> capitals, <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat), <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label_repel</span>(<span class="at">data =</span> pop, <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">label =</span> name)) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Awesome! We can improve this map further by leveraging color to make it clear which data points reflect our most populous capital cities. We can do this by noting which capital cities are in our top 10 within the <code>capitals</code> dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note our top 10 in the capitals data frame</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>top10 <span class="ot">&lt;-</span> pop<span class="sc">$</span>name</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>capitals<span class="sc">$</span>top10 <span class="ot">&lt;-</span> <span class="st">"0"</span> <span class="co"># not in top 10 = 0</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>capitals<span class="sc">$</span>top10[capitals<span class="sc">$</span>name <span class="sc">%in%</span> top10] <span class="ot">&lt;-</span> <span class="st">"1"</span> <span class="co"># in top 10 = 1</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># preview</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(capitals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             name country.etc    pop   lat   long capital top10
+5       Albany NY          NY  93576 42.67 -73.80       2     0
+26   Annapolis MD          MD  36300 38.98 -76.49       2     0
+41     Atlanta GA          GA 424096 33.76 -84.42       2     1
+46     Augusta ME          ME  18626 44.32 -69.77       2     0
+50      Austin TX          TX 683404 30.31 -97.75       2     1
+58 Baton Rouge LA          LA 222217 30.45 -91.13       2     0</code></pre>
+</div>
+</div>
+<p>We can use the new <code>top10</code> variable we created to color data points based on whether they are a top 10 most populous capital or not.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot with labels</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> usa_map, <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat)) <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> capitals, <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">color =</span> top10)) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label_repel</span>(<span class="at">data =</span> pop, <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">label =</span> name)) <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Finally, we can further customize this plot to bring the whole story together. We will change the size of the plotted points to show relative population sizes, customize the spacing of our city labels, include some new colors, remove the background and legend, and add a title and caption to denote what the map is showing.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># customize and final plot</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> usa_map, <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat)) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> capitals, <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">color =</span> top10, <span class="at">size =</span> pop<span class="sc">*</span>.<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label_repel</span>(<span class="at">data =</span> pop, <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">label =</span> name), </span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">color =</span> <span class="st">"#247B7B"</span>, <span class="at">direction =</span> <span class="st">"y"</span>, <span class="at">nudge_y =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="sc">-</span><span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#D5573B"</span>, <span class="st">"#247B7B"</span>)) <span class="sc">+</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>() <span class="sc">+</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Top 10 U.S. Capitals by Population"</span>,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data Source: maps R package"</span>) <span class="sc">+</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">20</span>),</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"italic"</span>, <span class="at">size =</span> <span class="dv">8</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Congratulations! You’ve now made your first customized map in R!</p>
+<p>So what else can we do? Well, there are limitations to what we can make with datasets saved in R packages and with packages that aren’t specific to mapmaking. As we move forward in this tutorial, I’m going to highlight three different types of maps that you can make using a variety of specialized geospatial and cartography packages. We will use different data sources too, including 1) OpenStreetMap data, 2) open source geospatial data from governing bodies, and 3) elevation data. We’ll focus on another country for the rest of tutorial, Switzerland.</p>
+</section>
+<section id="openstreetmap" class="level1">
+<h1>2) OpenStreetMap</h1>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-center">
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><img src="osm-logo.png" class="img-fluid" width="150"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 75.0%;justify-content: center;">
+<p>OpenStreetMap (OSM) is a free, open-source geographic database that’s maintained, updated, and supported by an online community of collaborators. It uses its own system to store geographical features like roads, waterways, and buildings which can then be used in a variety of geographic information systems (GIS) platforms and file formats.</p>
+</div>
+</div>
+</div>
+<p>In this section of the tutorial, we will use an OSM package in R called <code>osmdata</code> that allows us to query OSM and map features of a few Swiss cities. We’ll also cover how to create a focus area using different geometry projections to make our city maps more professional looking.</p>
+<p>First, let’s load some new packages that will be essential for working with OSM data. The first is <code>osmdata</code>, which allows us to download and use data from OSM. The second is <code>sf</code>, which allows us to translate geographic simple features (sf) into R objects to plot using <code>ggplot()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># packages</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(osmdata)     <span class="co"># download and use OSM data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Data (c) OpenStreetMap contributors, ODbL 1.0. https://www.openstreetmap.org/copyright</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)          <span class="co"># simple features</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE</code></pre>
+</div>
+</div>
+<p>We’ll first use <code>opq()</code> to query OSM and get two geographic features for Zürich, the largest city in Switzerland. These queries may take a minute or two depending on your computer and internet connection strength.</p>
+<p>Using a tidy piped statement, we can tell the <code>opq()</code> function which city we want to query, the feature we want to grab, and return that query in <code>sf</code> format. We’ll want to save each query separately so we can layer these features into the map.</p>
+<p>Just to note, we are using “Zurich, CH” as the string to query the city of Zürich. This is because the Latin words Confoederatio Helvetica means “Swiss Confederation”. And, fun fact, the typeface Helvetica was developed and aptly named in Switzerland in the 1950s!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GET ROADS</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># tell opq to query Zurich</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>zurich_roads <span class="ot">&lt;-</span> <span class="fu">opq</span>(<span class="st">"Zurich, CH"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># in Zurich, get all OSM features tagged as highways</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_osm_feature</span>(<span class="at">key =</span> <span class="st">"highway"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return in sf format</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">osmdata_sf</span>()</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co"># GET WATER</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>zurich_water <span class="ot">&lt;-</span> <span class="fu">opq</span>(<span class="st">"Zurich, CH"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_osm_feature</span>(<span class="at">key =</span> <span class="st">"water"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">osmdata_sf</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we have two <code>sf</code> objects containing roads and water features in Zürich, Switzerland. We can use <code>ggplot()</code> and <code>geom_sf()</code> to plot these features. With these queries, we get multiple types of shapes, including lines and polygons. Depending on the type of feature we’re mapping, we may want to use lines sometimes and polygons other times. For example, we’ll want to use lines when mapping roads and polygons when mapping bodies of water. We must specify these features using the <code>$</code> symbol when we tell <code>geom_sf()</code> what data to plot. In this case, we’re using a special kind of polygon called a multipolygon, which is made up of polygon elements and can be useful when plotting detailed shapes. These are especially useful for mapping geographic features!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot roads and water in Zurich</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> zurich_roads<span class="sc">$</span>osm_lines) <span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> zurich_water<span class="sc">$</span>osm_multipolygons)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Well, this is pretty ugly BUT it shows us a lot of interesting information about how OSM gathered data for us.</p>
+<p>First, let’s look at the roads. We can see that OSM queried all roads in a given area and pulled information in a square. This is because it uses “bounding boxes” or “bbox” to define the query area by two longitudes and two latitudes (creating a literal bounding box for the query). This is useful in theory, but I’ve found that I rarely want to define a map’s boundaries by this type of bounding box. More often, I’ll use administrative boundaries of a country or shapes I define myself.</p>
+<p>Let’s look at the water. Because we’re plotting the multipolygons, we can see that we have water feature information that extends beyond the bbox, even though the query was limited to the same bbox as the roads.</p>
+<p>Now that we have a better sense of what’s going on, we can do some simple steps to make this map more interpretable. To do this, we will zoom in and focus just on mapping the city center. We’ll define a circle around the center coordinates of Zürich and limit mapping our OSM features to that circle.</p>
+<p>We first need to find the center coordinates of Zürich. Using a quick Google search, I found that the latitude is 47.3769 and the longitude is 8.5417. When you search yourself, you’ll see these values followed by “degrees N” and “degrees E” respectively. This gives a clue about how to plot latitude and longitude, if we think about latitude as degrees of east and west and longitude as degrees of north and south.</p>
+<p>We’ll need to save these coordinates as an object called <code>zurich_center</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get zurich city center coordinates</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>zurich_center <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">lat =</span> <span class="fl">47.3769</span>,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">long =</span> <span class="fl">8.5417</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we want to create a circle around this center coordinate. To do this, we need to define the distance of the circle’s radius and the coordinate reference system (CRS). The CRS refers to the target coordinate system that we want to use to draw the circle, and we want this to match the standard that Switzerland uses in this case. Otherwwise, the standard CRS is 4326, which is the EPSG identifier of WGS84, the standard coordinate frame for Earth that uses longitude and latitude.</p>
+<p>What you need to take away from the CRS definition, is that we are telling R to transform the circle around the city center into longitude and latitude using a second CRS that is local to the area we’re in. For Switzerland, it’s 2056.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reproject to make a circle around the center coordinates</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># define the latitude and longitude using the zurich city center coordinates</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>zurich_circle <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">lat =</span> zurich_center[<span class="st">"lat"</span>],</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">long =</span> zurich_center[<span class="st">"long"</span>]) <span class="sc">|&gt;</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># project these coordinates in standard CRS (4326)</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"long"</span>, <span class="st">"lat"</span>),</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">crs =</span> <span class="dv">4326</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># now transform to local CRS (2056)</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> <span class="dv">2056</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># define our buffer distance (circle radius)</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_buffer</span>(<span class="at">dist =</span> <span class="dv">2000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># re-transform the circle back to standard CRS (4326)</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> <span class="dv">4326</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ok now we have our OSM objects (roads and water) and the defined circle for Zürich. We can use these together to get the intersection using <code>st_intersection()</code>. We’ll save these new objects as cropped versions of the originals. This chunk may also take a few minutes to run depending on your computer.</p>
+<p>You may see a warning that says “attribute variables are assumed to be spatially constant throughout all geometries.” You can ignore this, since we modified the data to ensure they are spatially constant!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the intersection between roads/water and circle</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># will take a minute to execute</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>zurich_roads_cropped <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(zurich_circle, zurich_roads<span class="sc">$</span>osm_lines)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: attribute variables are assumed to be spatially constant throughout
+all geometries</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>zurich_water_cropped <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(zurich_circle, zurich_water<span class="sc">$</span>osm_multipolygons)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: attribute variables are assumed to be spatially constant throughout
+all geometries</code></pre>
+</div>
+</div>
+<p>Let’s make a new map using our cropped data To distinguish between elements, I’ve added a few colors: white for the circle, black for the roads, and blue for the water. I’m also defining a <code>linewidth</code> for the roads to make them easier to distinguish from each other. For this map, since we’ve now pivoted to data in <code>sf</code> format, we can no longer use <code>coord_cartesian()</code>. We must instead use <code>coord_sf()</code> to tell R that</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># basic</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> zurich_circle, <span class="at">fill =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> zurich_roads_cropped, <span class="at">linewidth =</span> <span class="fl">0.05</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> zurich_water_cropped, <span class="at">fill =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>() <span class="sc">+</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Much better! We can clearly see the roads in the city center and the water of Zürichsee, or Lake Zürich. We’ll further customize this map later in the tutorial.</p>
+<p>Now, try making a similar map to the one we just made using the city of Interlaken.</p>
+<section id="now-its-your-turn" class="level2">
+<h2 class="anchored" data-anchor-id="now-its-your-turn">Now it’s your turn!</h2>
+<div class="cell">
+<details>
+<summary>Reveal Answer</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get roads</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>interlaken_roads <span class="ot">&lt;-</span> <span class="fu">opq</span>(<span class="st">"Interlaken, Switzerland"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_osm_feature</span>(<span class="at">key =</span> <span class="st">"highway"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">osmdata_sf</span>()</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co"># get water</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>interlaken_water <span class="ot">&lt;-</span> <span class="fu">opq</span>(<span class="st">"Interlaken, Switzerland"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_osm_feature</span>(<span class="at">key =</span> <span class="st">"water"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">osmdata_sf</span>()</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="co"># define circle to cut out a view of interlaken</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="co"># get interlaken city center coordinates (googled "interlaken coordinates")</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>interlaken_center <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">lat =</span> <span class="fl">46.6863</span>,</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>                   <span class="at">long =</span> <span class="fl">7.8632</span>)</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="co"># reproject to make circle around center coordinates</span></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>interlaken_circle <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">lat =</span> interlaken_center[<span class="st">"lat"</span>],</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>                            <span class="at">long =</span> interlaken_center[<span class="st">"long"</span>]) <span class="sc">|&gt;</span></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"long"</span>, <span class="st">"lat"</span>),</span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>           <span class="at">crs =</span> <span class="dv">4326</span>) <span class="sc">|&gt;</span></span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> <span class="dv">2056</span>) <span class="sc">|&gt;</span></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_buffer</span>(<span class="at">dist =</span> <span class="dv">2000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a><span class="co"># get the intersection between roads/water and circle</span></span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a><span class="co"># will take a minute to execute</span></span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>interlaken_roads_cropped <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(interlaken_circle,</span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a>                                            interlaken_roads<span class="sc">$</span>osm_lines)</span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a>interlaken_water_cropped <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(interlaken_circle,</span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a>                                            interlaken_water<span class="sc">$</span>osm_multipolygons<span class="sc">$</span>geometry)</span>
+<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a><span class="co"># basic</span></span>
+<span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb36-32"><a href="#cb36-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> interlaken_circle, <span class="at">fill =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb36-33"><a href="#cb36-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> interlaken_roads_cropped, <span class="at">linewidth =</span> <span class="fl">0.05</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb36-34"><a href="#cb36-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> interlaken_water_cropped, <span class="at">fill =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb36-35"><a href="#cb36-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>() <span class="sc">+</span></span>
+<span id="cb36-36"><a href="#cb36-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="online-open-data" class="level1">
+<h1>3) Online Open Data</h1>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-center">
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><img src="envidat.png" class="img-fluid" width="200"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 75.0%;justify-content: center;">
+<p>There are hundreds of online, open data resources for mapmaking. Cities, countries, and governments often have a geospatial data resource that you can find by searching “[city/country name] open data”. You can often find data in multiple file types, including .csv and .shp, and usually don’t need to create any account or pay for access.</p>
+</div>
+</div>
+</div>
+<p>For Switzerland, we can use <a href="https://www.envidat.ch/#/">EnviDat</a> to download some publicly available environmental geospatial data. There is a lot of data here and at <a href="https://opendata.swiss/en">opendata.swiss</a>, so I highly encourage you to try downloading more data after you finish this tutorial.</p>
+<p>The data used in this tutorial can be found online <a href="https://www.envidat.ch/dataset/avalanche-accidents-in-switzerland-since-1970-71/resource/4bd38bab-26e0-485e-be94-486551e94072">here</a>. A copy of the data can be found along with this tutorial.</p>
+<p><strong>Data Citation:</strong> WSL Institute for Snow and Avalanche Research SLF (2023). Avalanche accidents in Switzerland since 1970/71. <em>EnviDat</em>. doi:10.16904/envidat.411.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load packages</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)            <span class="co"># load excel data</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgeoboundaries)    <span class="co"># canton administrative boundaries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load avalanche data</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>avalanche <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"avalanche-data.xlsx"</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># preview</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(avalanche)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 19
+  avalanche.id         date                date.quality hydrological.year canton
+  &lt;chr&gt;                &lt;dttm&gt;                     &lt;dbl&gt; &lt;chr&gt;             &lt;chr&gt; 
+1 afbfcea9-91d4-441d-… 1970-10-05 00:00:00            0 1970/71           BE    
+2 861431db-0239-4e52-… 1970-10-23 00:00:00            0 1970/71           UR    
+3 094f1b42-4a6f-4388-… 1970-12-27 00:00:00            0 1970/71           SG    
+4 13d285cd-c1a6-4f2d-… 1970-12-28 00:00:00            0 1970/71           SG    
+5 d248b0f6-70f5-49b1-… 1971-01-03 00:00:00            0 1970/71           GR    
+6 5ec15626-13ab-4f76-… 1971-01-03 00:00:00            0 1970/71           TI    
+# ℹ 14 more variables: municipality &lt;chr&gt;,
+#   start.zone.coordinates.latitude &lt;dbl&gt;,
+#   start.zone.coordinates.longitude &lt;dbl&gt;, coordinates.quality &lt;dbl&gt;,
+#   start.zone.elevation &lt;dbl&gt;, start.zone.slope.aspect &lt;chr&gt;,
+#   start.zone.inclination &lt;chr&gt;, forecasted.dangerlevel.rating1 &lt;lgl&gt;,
+#   forecasted.dangerlevel.rating2 &lt;lgl&gt;,
+#   forecasted.most.dangerous.aspect.and.elevation &lt;lgl&gt;, number.dead &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get canton-level data</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>canton <span class="ot">&lt;-</span> rgeoboundaries<span class="sc">::</span><span class="fu">geoboundaries</span>(<span class="st">"Switzerland"</span>, <span class="at">adm_lvl =</span> <span class="st">"adm1"</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co"># show</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>canton</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 26 features and 6 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 5.955901 ymin: 45.81796 xmax: 10.49217 ymax: 47.80845
+Geodetic CRS:  WGS 84
+First 10 features:
+   shapeGroup shapeType              shapeName shapeISO                 shapeID
+1         CHE      ADM1                 Aargau    CH-AG 70761945B11338788345342
+2         CHE      ADM1 Appenzell Ausserrhoden    CH-AR 70761945B71472094577065
+3         CHE      ADM1  Appenzell Innerrhoden    CH-AI 70761945B73029947081098
+4         CHE      ADM1       Basel-Landschaft    CH-BL 70761945B84766611276082
+5         CHE      ADM1            Basel-Stadt    CH-BS 70761945B62987387977087
+6         CHE      ADM1                   Bern    CH-BE 70761945B78940680080703
+7         CHE      ADM1               Fribourg    CH-FR 70761945B87604960987122
+8         CHE      ADM1                 Genève    CH-GE 70761945B83881285484717
+9         CHE      ADM1                 Glarus    CH-GL 70761945B11753136967749
+10        CHE      ADM1             Graubünden    CH-GR 70761945B85432491504073
+   shapeCanonical                       geometry
+1          Canton MULTIPOLYGON (((8.438234 47...
+2          Canton MULTIPOLYGON (((9.502915 47...
+3          Canton MULTIPOLYGON (((9.36218 47....
+4          Canton MULTIPOLYGON (((7.375951 47...
+5          Canton MULTIPOLYGON (((7.633964 47...
+6          Canton MULTIPOLYGON (((7.134417 46...
+7          Canton MULTIPOLYGON (((6.77301 46....
+8          Canton MULTIPOLYGON (((6.21955 46....
+9          Canton MULTIPOLYGON (((8.877053 46...
+10         Canton MULTIPOLYGON (((8.877053 46...</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in order to eventually match our avalanche data with our canton data, we need to change </span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the canton codes in the avalanche data frame to the full names seen in the canton data frame</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co"># we'll call it shapeName to match and merge easily later</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>avalanche<span class="sc">$</span>shapeName <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>avalanche<span class="sc">$</span>shapeName[avalanche<span class="sc">$</span>canton <span class="sc">==</span> <span class="st">"BE"</span>] <span class="ot">&lt;-</span> <span class="st">"Bern"</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>avalanche<span class="sc">$</span>shapeName[avalanche<span class="sc">$</span>canton <span class="sc">==</span> <span class="st">"UR"</span>] <span class="ot">&lt;-</span> <span class="st">"Uri"</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>avalanche<span class="sc">$</span>shapeName[avalanche<span class="sc">$</span>canton <span class="sc">==</span> <span class="st">"SG"</span>] <span class="ot">&lt;-</span> <span class="st">"St. Gallen"</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>avalanche<span class="sc">$</span>shapeName[avalanche<span class="sc">$</span>canton <span class="sc">==</span> <span class="st">"GR"</span>] <span class="ot">&lt;-</span> <span class="st">"Graubünden"</span></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>avalanche<span class="sc">$</span>shapeName[avalanche<span class="sc">$</span>canton <span class="sc">==</span> <span class="st">"TI"</span>] <span class="ot">&lt;-</span> <span class="st">"Ticino"</span></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>avalanche<span class="sc">$</span>shapeName[avalanche<span class="sc">$</span>canton <span class="sc">==</span> <span class="st">"GL"</span>] <span class="ot">&lt;-</span> <span class="st">"Glarus"</span></span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>avalanche<span class="sc">$</span>shapeName[avalanche<span class="sc">$</span>canton <span class="sc">==</span> <span class="st">"NW"</span>] <span class="ot">&lt;-</span> <span class="st">"Nidwalden"</span></span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>avalanche<span class="sc">$</span>shapeName[avalanche<span class="sc">$</span>canton <span class="sc">==</span> <span class="st">"VS"</span>] <span class="ot">&lt;-</span> <span class="st">"Valais"</span></span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>avalanche<span class="sc">$</span>shapeName[avalanche<span class="sc">$</span>canton <span class="sc">==</span> <span class="st">"AI"</span>] <span class="ot">&lt;-</span> <span class="st">"Appenzell Innerrhoden"</span></span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>avalanche<span class="sc">$</span>shapeName[avalanche<span class="sc">$</span>canton <span class="sc">==</span> <span class="st">"SZ"</span>] <span class="ot">&lt;-</span> <span class="st">"Schwyz"</span></span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>avalanche<span class="sc">$</span>shapeName[avalanche<span class="sc">$</span>canton <span class="sc">==</span> <span class="st">"VD"</span>] <span class="ot">&lt;-</span> <span class="st">"Vaud"</span></span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>avalanche<span class="sc">$</span>shapeName[avalanche<span class="sc">$</span>canton <span class="sc">==</span> <span class="st">"OW"</span>] <span class="ot">&lt;-</span> <span class="st">"Obwalden"</span></span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a>avalanche<span class="sc">$</span>shapeName[avalanche<span class="sc">$</span>canton <span class="sc">==</span> <span class="st">"FR"</span>] <span class="ot">&lt;-</span> <span class="st">"Fribourg"</span></span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a>avalanche<span class="sc">$</span>shapeName[avalanche<span class="sc">$</span>canton <span class="sc">==</span> <span class="st">"AR"</span>] <span class="ot">&lt;-</span> <span class="st">"Appenzell Ausserrhoden"</span></span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a>avalanche<span class="sc">$</span>shapeName[avalanche<span class="sc">$</span>canton <span class="sc">==</span> <span class="st">"LU"</span>] <span class="ot">&lt;-</span> <span class="st">"Luzern"</span></span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a>avalanche<span class="sc">$</span>shapeName[avalanche<span class="sc">$</span>canton <span class="sc">==</span> <span class="st">"SO"</span>] <span class="ot">&lt;-</span> <span class="st">"Solothurn"</span></span>
+<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a>avalanche<span class="sc">$</span>shapeName[avalanche<span class="sc">$</span>canton <span class="sc">==</span> <span class="st">"NE"</span>] <span class="ot">&lt;-</span> <span class="st">"Neuchâtel"</span></span>
+<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a><span class="co"># subset with only present canton names</span></span>
+<span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a>avalanche <span class="ot">&lt;-</span> <span class="fu">subset</span>(avalanche, <span class="sc">!</span><span class="fu">is.na</span>(shapeName))</span>
+<span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate number of avalanches per canton per year</span></span>
+<span id="cb42-28"><a href="#cb42-28" aria-hidden="true" tabindex="-1"></a>avalanche_summary_years <span class="ot">&lt;-</span> avalanche <span class="sc">|&gt;</span></span>
+<span id="cb42-29"><a href="#cb42-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hydrological.year, shapeName) <span class="sc">|&gt;</span></span>
+<span id="cb42-30"><a href="#cb42-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avalanche_count =</span> <span class="fu">length</span>(avalanche.id))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'hydrological.year'. You can override using
+the `.groups` argument.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>avalanche_summary_total <span class="ot">&lt;-</span> avalanche <span class="sc">|&gt;</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(shapeName) <span class="sc">|&gt;</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avalanche_count =</span> <span class="fu">length</span>(avalanche.id)) <span class="sc">|&gt;</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total_avalanche =</span> <span class="fu">sum</span>(avalanche_count)) <span class="sc">|&gt;</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">canton_prop =</span> avalanche_count<span class="sc">/</span>total_avalanche)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># merge canton data with avalanche severity data</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>avalanche_summary <span class="ot">&lt;-</span> <span class="fu">merge</span>(avalanche_summary_total, canton, <span class="at">by =</span> <span class="st">"shapeName"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> canton, <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="st">"#08171e"</span>) <span class="sc">+</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> avalanche_summary<span class="sc">$</span>geometry, <span class="fu">aes</span>(<span class="at">fill =</span> avalanche_summary<span class="sc">$</span>canton_prop)) <span class="sc">+</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"#D3D0CB"</span>, <span class="at">high =</span> <span class="st">"#D5573B"</span>) <span class="sc">+</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>() <span class="sc">+</span></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="now-its-your-turn-1" class="level2">
+<h2 class="anchored" data-anchor-id="now-its-your-turn-1">Now it’s your turn!</h2>
+<p>Try using the avalanche coordinates to plot the exact locations for the 2022/23 hydrological year. Use the canton map we already created and <code>geom_sf()</code> to plot the avalanche locations. If you want a bonus challenge, you can color the points by the number of people who died in the avalanches.</p>
+<p><strong>HINT</strong>: You’ll need the following code to transform the latitude and longitude variables in the avalanche dataset to <code>sf</code> geometry.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>new_avalanche_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(subset_avalanche_data,</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">coords =</span> <span class="fu">c</span>(LONGITUDE, LATITUDE),</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">crs =</span> <span class="dv">4326</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<details>
+<summary>Reveal Answer</summary>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># subset avalanche dataset to just the 2022/23 hydrological year</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>avalanche_22_23 <span class="ot">&lt;-</span> <span class="fu">subset</span>(avalanche, hydrological.year <span class="sc">==</span> <span class="st">"2022/23"</span>)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co"># select only variables of interest (just keeps the data cleaner)</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>avalanche_22_23 <span class="ot">&lt;-</span> avalanche_22_23 <span class="sc">|&gt;</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(start.zone.coordinates.latitude, start.zone.coordinates.longitude,</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>         number.dead, shapeName, avalanche.id)</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="co"># rename variables for ease</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(avalanche_22_23) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"lat"</span>, <span class="st">"long"</span>, <span class="st">"num_dead"</span>, <span class="st">"shapeName"</span>, <span class="st">"ID"</span>)</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a><span class="co"># convert to sf object</span></span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>avalanche_sf <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_as_sf</span>(avalanche_22_23,</span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>                     <span class="at">coords =</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">1</span>),</span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>                     <span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> canton, <span class="at">fill =</span> <span class="st">"#08171e"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> avalanche_sf, <span class="fu">aes</span>(<span class="at">color =</span> num_dead), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>() <span class="sc">+</span></span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient</span>(<span class="at">low =</span> <span class="st">"#D3D0CB"</span>, <span class="at">high =</span> <span class="st">"#D5573B"</span>, <span class="at">name =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
+<span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="fl">0.25</span>, <span class="st">"cm"</span>),</span>
+<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key.height =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"cm"</span>),</span>
+<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb48-24"><a href="#cb48-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"#08171e"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="elevation" class="level1">
+<h1>4) Elevation</h1>
+<p>The final type of geospatial data that we’ll work with in this tutorial is elevation data. This reflects the geographic height of different locations, usually in reference to sea level. We will use this data to create contour lines, an old cartography technique that uses line spacing and thickness to denote elevation on a flat, 2D map.</p>
+<p>Let’s start off by loading some R packages that are useful when working with elevation data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># packages</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgeoboundaries)    <span class="co"># country administrative boundaries</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(showtext)          <span class="co"># use google fonts</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: sysfonts</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: showtextdb</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(elevatr)           <span class="co"># elevation data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>elevatr v0.99.0 NOTE: Version 0.99.0 of 'elevatr' uses 'sf' and 'terra'.  Use 
+of the 'sp', 'raster', and underlying 'rgdal' packages by 'elevatr' is being 
+deprecated; however, get_elev_raster continues to return a RasterLayer.  This 
+will be dropped in future versions, so please plan accordingly.</code></pre>
+</div>
+</div>
+<p>In this section, we will use the administrative boundaries for Switzerland to define where we want to pull elevation data from. We can get the administrative boundaries of any country using the <code>rgeoboundaries</code> package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get country-level data</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>swiss <span class="ot">&lt;-</span> rgeoboundaries<span class="sc">::</span><span class="fu">geoboundaries</span>(<span class="st">"Switzerland"</span>)</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="co"># show</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>swiss</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 1 feature and 6 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 5.955901 ymin: 45.81796 xmax: 10.49217 ymax: 47.80845
+Geodetic CRS:  WGS 84
+  shapeGroup shapeType               shapeName shapeISO                 shapeID
+1        CHE      ADM0 The Swiss Confederation      CHE 87024499B82891532811338
+           shapeCanonical                       geometry
+1 The Swiss Confederation MULTIPOLYGON (((8.568881 47...</code></pre>
+</div>
+</div>
+<p>If we examine the administrative boundary data, we see an important variable called <code>geometry</code>. This contains the multipolygon defining the geographic boundaries of Switzerland. We can use this in combination with the <code>elevatr</code> package and get elevation information ONLY within these defined boundaries. In this case, that means getting elevation data for all of Switzerland and no surrounding countries.</p>
+<p>Since Switzerland is famous for its Alps, I’m going to save my elevation data into an object called <code>alps</code>. We’ll use a function called <code>get_elev_raster()</code> from the <code>elevatr</code> package to pull elevation data. We need to define five arguments for this function to get us the data we want.</p>
+<p>First, we need to define the locations, which is the <code>swiss</code> administrative boundary object we just created. Then, we need to define the zoom level, which ranges from 1 to 14. You can play around with the zoom to your liking, but I’ll use 6. We also need to define the clip, which is what allows us to use the multipolygon to clip the returned elevation data. We will set <code>neg_to_na</code> to TRUE to change any negative values to NA. Finally, we need to define the projection and ensure our data is using WGS84 latitude and longitude coordinates.</p>
+<p>Our elevation will be saved in meters by default.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get elevation</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>alps <span class="ot">&lt;-</span> elevatr<span class="sc">::</span><span class="fu">get_elev_raster</span>(<span class="at">locations =</span> swiss, <span class="at">z =</span> <span class="dv">6</span>, <span class="at">clip =</span> <span class="st">"locations"</span>,</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">neg_to_na =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">prj =</span> <span class="st">"+proj=longlat +ellps=WGS84 +datum=WGS84"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Mosaicing &amp; Projecting</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Clipping DEM to locations</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Note: Elevation units are in meters.</code></pre>
+</div>
+</div>
+<p>You might notice this saves the data as a “large RasterLayer”. We want to convert this to a dataframe and remove any missing elevation values. We can convert it using the <code>terra</code> package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert elevation raster to data frame</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>alps <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">as.data.frame</span>(alps, <span class="at">xy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(alps) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"lat"</span>, <span class="st">"long"</span>, <span class="st">"elevation"</span>) <span class="co"># meters</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="co"># remove missing elevation values</span></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>alps <span class="ot">&lt;-</span> <span class="fu">subset</span>(alps, <span class="sc">!</span><span class="fu">is.na</span>(elevation))</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="co"># preview</span></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(alps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         lat     long elevation
+278 8.562816 47.79908       828
+279 8.572217 47.79908       790
+280 8.581618 47.79908       761
+281 8.591019 47.79908       743
+282 8.600420 47.79908       725
+283 8.609821 47.79908       702</code></pre>
+</div>
+</div>
+<p>Awesome, we now have a dataset of latitude and longitude coordinates and a corresponding elevation for each point. We can use this data in combination with a new geom called <code>geom_contour()</code> and create a contour-line map.</p>
+<p>To use <code>geom_contour()</code>, we need to define the vertical height (<code>z</code>) using our elevation variable. We can also color the elevation depending on the height using <code>after_stat(level)</code> in the color argument.</p>
+<p>We’ll also first plot our swiss polygon using <code>geom_sf()</code> to show the administrative boundaries of Switzerland in addition to our contour lines. And again, since we’re using data in <code>sf</code> format, we need to define our coordinates using <code>coord_sf()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> swiss) <span class="sc">+</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_contour</span>(<span class="at">data =</span> alps, <span class="fu">aes</span>(<span class="at">x =</span> lat, <span class="at">y =</span> long, <span class="at">z =</span> elevation, <span class="at">color =</span> <span class="fu">after_stat</span>(level))) <span class="sc">+</span> </span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Cool! We now have a basic contour elevation map. As elevation increases, the contour line shifts from a dark to light blue.</p>
+</section>
+<section id="customize" class="level1">
+<h1>Customize</h1>
+<section id="openstreetmap-1" class="level2">
+<h2 class="anchored" data-anchor-id="openstreetmap-1">OpenStreetMap</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># zurich</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> zurich_circle, <span class="at">fill =</span> <span class="st">"#08171e"</span>) <span class="sc">+</span></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> zurich_roads_cropped, <span class="at">linewidth =</span> <span class="fl">0.05</span>, <span class="at">color =</span> <span class="st">"#D3D0CB"</span>) <span class="sc">+</span></span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> zurich_water_cropped, <span class="at">fill =</span> <span class="st">"#247B7B"</span>, <span class="at">color =</span> <span class="st">"#247B7B"</span>) <span class="sc">+</span></span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>() <span class="sc">+</span></span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(plot,</span>
+<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">filename =</span> <span class="st">"./output/zurich.png"</span>,</span>
+<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">5</span>,</span>
+<span id="cb63-12"><a href="#cb63-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">height =</span> <span class="dv">3</span>,</span>
+<span id="cb63-13"><a href="#cb63-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">units =</span> <span class="st">"in"</span>,</span>
+<span id="cb63-14"><a href="#cb63-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">dpi =</span> <span class="dv">600</span>,</span>
+<span id="cb63-15"><a href="#cb63-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">device =</span> <span class="st">"png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="./output/zurich.png" class="img-fluid"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># interlaken</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> interlaken_circle, <span class="at">fill =</span> <span class="st">"#D3D0CB"</span>) <span class="sc">+</span></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> interlaken_roads_cropped, <span class="at">linewidth =</span> <span class="fl">0.05</span>, <span class="at">color =</span> <span class="st">"#08171e"</span>) <span class="sc">+</span></span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> interlaken_water_cropped, <span class="at">fill =</span> <span class="st">"#247B7B"</span>, <span class="at">color =</span> <span class="st">"#247B7B"</span>) <span class="sc">+</span></span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>() <span class="sc">+</span></span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() </span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(plot,</span>
+<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">filename =</span> <span class="st">"./output/interlaken.png"</span>,</span>
+<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">5</span>,</span>
+<span id="cb64-12"><a href="#cb64-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">height =</span> <span class="dv">3</span>,</span>
+<span id="cb64-13"><a href="#cb64-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">units =</span> <span class="st">"in"</span>,</span>
+<span id="cb64-14"><a href="#cb64-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">dpi =</span> <span class="dv">600</span>,</span>
+<span id="cb64-15"><a href="#cb64-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">device =</span> <span class="st">"png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="./output/interlaken.png" class="img-fluid"></p>
+</section>
+<section id="online-open-data-1" class="level2">
+<h2 class="anchored" data-anchor-id="online-open-data-1">Online Open Data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># avalanches</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> canton, <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="st">"#08171e"</span>) <span class="sc">+</span></span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> avalanche_summary<span class="sc">$</span>geometry, <span class="fu">aes</span>(<span class="at">fill =</span> avalanche_summary<span class="sc">$</span>canton_prop)) <span class="sc">+</span></span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"#D3D0CB"</span>, <span class="at">high =</span> <span class="st">"#D5573B"</span>, <span class="at">name =</span> <span class="cn">NULL</span>, <span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>()) <span class="sc">+</span></span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>() <span class="sc">+</span></span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
+<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key.width =</span> <span class="fu">unit</span>(<span class="fl">0.25</span>, <span class="st">"cm"</span>),</span>
+<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key.height =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"cm"</span>),</span>
+<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#08171e"</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb65-12"><a href="#cb65-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"white"</span>))</span>
+<span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-14"><a href="#cb65-14" aria-hidden="true" tabindex="-1"></a><span class="co"># save</span></span>
+<span id="cb65-15"><a href="#cb65-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(plot,</span>
+<span id="cb65-16"><a href="#cb65-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">filename =</span> <span class="st">"./output/avalanche.png"</span>,</span>
+<span id="cb65-17"><a href="#cb65-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">5</span>,</span>
+<span id="cb65-18"><a href="#cb65-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">height =</span> <span class="dv">3</span>,</span>
+<span id="cb65-19"><a href="#cb65-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">units =</span> <span class="st">"in"</span>,</span>
+<span id="cb65-20"><a href="#cb65-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">dpi =</span> <span class="dv">600</span>,</span>
+<span id="cb65-21"><a href="#cb65-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">device =</span> <span class="st">"png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="./output/avalanche.png" class="img-fluid"></p>
+</section>
+<section id="elevation-1" class="level2">
+<h2 class="anchored" data-anchor-id="elevation-1">Elevation</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get font</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">showtext_auto</span>()</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="fu">font_add_google</span>(<span class="at">name =</span> <span class="st">"Sacramento"</span>, <span class="at">family =</span> <span class="st">"sacramento"</span>)</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="co"># elevation</span></span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> swiss, <span class="at">fill =</span> <span class="st">"#08171e"</span>, <span class="at">color =</span> <span class="st">"#08171e"</span>) <span class="sc">+</span></span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_contour</span>(<span class="at">data =</span> alps, <span class="fu">aes</span>(<span class="at">x =</span> lat, <span class="at">y =</span> long, <span class="at">z =</span> elevation, <span class="at">color =</span> <span class="fu">after_stat</span>(level)), </span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">linewidth =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradientn</span>(<span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"#042b44"</span>,<span class="st">"#a1ccdc"</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">500</span>,<span class="dv">4000</span>)) <span class="sc">+</span></span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"text"</span>,</span>
+<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"Switzerland"</span>,</span>
+<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">y =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.05</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">9.3</span>,</span>
+<span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">60</span>, <span class="at">family =</span> <span class="st">"sacramento"</span>, <span class="at">color =</span> <span class="st">"#042b44"</span>) <span class="sc">+</span></span>
+<span id="cb66-14"><a href="#cb66-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb66-15"><a href="#cb66-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>() <span class="sc">+</span></span>
+<span id="cb66-16"><a href="#cb66-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb66-17"><a href="#cb66-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#a1ccdc"</span>, <span class="at">color =</span> <span class="cn">NA</span>))</span>
+<span id="cb66-18"><a href="#cb66-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-19"><a href="#cb66-19" aria-hidden="true" tabindex="-1"></a><span class="co"># save</span></span>
+<span id="cb66-20"><a href="#cb66-20" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(plot,</span>
+<span id="cb66-21"><a href="#cb66-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">filename =</span> <span class="st">"./output/swiss-elevation.png"</span>,</span>
+<span id="cb66-22"><a href="#cb66-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">5</span>,</span>
+<span id="cb66-23"><a href="#cb66-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">height =</span> <span class="dv">3</span>,</span>
+<span id="cb66-24"><a href="#cb66-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">units =</span> <span class="st">"in"</span>,</span>
+<span id="cb66-25"><a href="#cb66-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">dpi =</span> <span class="dv">600</span>,</span>
+<span id="cb66-26"><a href="#cb66-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">device =</span> <span class="st">"png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="./output/swiss-elevation.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="next-steps" class="level1">
+<h1>Next Steps</h1>
+<p>Congratulations, you are now a cartographer! What’s next for your new mapmaking skills?</p>
+<p>Below you will find some additional resources for using spatial data and making maps in R. I’ve also included a few websites where you can find a lot of open geospatial data.</p>
+<p><strong>RESOURCES</strong><br>
+- <a href="https://r.geocompx.org/">Geocomputation with R</a><br>
+- <a href="https://cengel.github.io/R-spatial/">Using Spatial Data with R</a><br>
+- <a href="https://link.springer.com/book/10.1007/978-1-4614-7618-4">Applied Spatial Data Analysis with R</a></p>
+<p><strong>DATA</strong><br>
+- <a href="https://opendataphilly.org/">OpenDataPhilly</a><br>
+- <a href="https://www.data.govt.nz/toolkit/open-data/">data.govt.nz</a><br>
+- <a href="https://livingatlas.arcgis.com/esri_ngda_datasets/">Esri Open Access National Datasets</a></p>
+<p>I also want to encourage all of you to take part in this year’s <a href="https://30daymapchallenge.com/">#30DayMapChallenge</a>, a month-long mapmaking challenge in November 2024. I’ve participated in two of these challenges so far, and they were BY FAR the best way for me to practice and learn more about making maps. There’s a fabulous online community of digital mapmakers that take part in the challenge every year, and I find everyone’s creativity and programming skill to be really inspiring. This community also loves to share code and resources for anyone else to follow.</p>
+<p>I’ve included a collection of the maps I’ve made while participating below, and you can find all my code on GitHub (<a href="https://github.com/hschmidt12/30DayMapChallenge-2022">2022</a>, <a href="https://github.com/hschmidt12/30DayMapChallenge-2023">2023</a>).</p>
+<p><img src="final2022.png" class="img-fluid"></p>
+<p><img src="final2023.png" class="img-fluid"></p>
+<p>Happy mapmaking!!</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,21 @@
+---
+title: "30 Day Map Challenge"
+description: "Throughout November 2022, I took part in the #30DayMapChallenge, a month-long challenge to create original maps using geospatial data. Check out the results!"
+author:
+  - name: Helen Schmidt
+    url: https://helenschmidt.info
+    orcid: 0000-0003-0986-2945
+    affiliation: PhD Student @ Temple University
+    affiliation-url: https://sites.temple.edu/sanlab/ 
+date: 04-01-2023
+categories: [Maps, R, Open Data] # self-defined categories
+image: final.png # image to appear in portfolio landing page
+draft: false # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
+---
+
+Every November, the [#30DayMapChallenge](https://30daymapchallenge.com/) encourages data visualization enthusiasts to create original maps using publicly-available geospatial data.
+Every day presented a new theme, and I used R to create my maps around these themes.
+This was a fun experience, and I was really proud of how much I learned about working with geospatial data in R by the end of the month.
+All corresponding code and individual maps can be found on my [GitHub](https://github.com/hschmidt12/30DayMapChallenge-2022).
+
+<img src="final.png" width="800" height="500" style="float: left; position: relative; top: 0px; padding: 30px;"/>

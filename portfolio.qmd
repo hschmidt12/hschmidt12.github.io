@@ -1,0 +1,8 @@
+---
+title: "Portfolio"
+listing: 
+  contents: posts # all Quarto docs in the `posts` directory will be included on listing page
+  type: default 
+  sort: "date desc" # sort by descending date
+  categories: true # allows for sorting postings by assigned categories 
+---

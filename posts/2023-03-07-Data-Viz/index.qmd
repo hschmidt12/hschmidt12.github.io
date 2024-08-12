@@ -1,0 +1,366 @@
+---
+title: "Data Visualizations in R"
+description: "Using open-source data and `tidyverse` packages, this demo explores different data wrangling and plotting techniques in R."
+author:
+  - name: Helen Schmidt
+    url: https://helenschmidt.info
+    orcid: 0000-0003-0986-2945
+    affiliation: PhD Student @ Temple University
+    affiliation-url: https://sites.temple.edu/sanlab/ 
+date: 03-07-2023
+categories: [Data Viz, R, Open Data] # self-defined categories
+image: post-image.png # image to appear in portfolio landing page
+draft: false # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
+---
+
+This demo uses an open-source dataset to explore different data wrangling and plotting techniques in R. Data organization is hugely important because it can impact the quality and accuracy of any statistical tests or visualizations. A popular collection of data organization packages is the `tidyverse`, which all share an "underlying design philosophy, grammar, and data structure" ([see more](https://www.tidyverse.org/){target="_blank"}).
+
+The basic structure of tidy data is every variable goes into a column and every column is a variable. Using this framework, we can manipulate the data to calculate new values, run statistical tests, and generate a graphic. In this demo, I will primarily use `dplyr`, `ggplot2`, and `tidyr` to organize my data and make some beautiful plots. I will be using the [Top Hits Spotify from 2000 - 2019](https://www.kaggle.com/datasets/paradisejoy/top-hits-spotify-from-20002019){target="_blank"} dataset, available on Kaggle.
+
+## Load packages and data
+
+First, I will load the packages I need. If you do not already have tidyverse packages installed on your computer, you should install them using `install.packages('tidyverse')` first. The other packages I'm loading will be useful for customizing my plots. I'll also set a global theme to `theme_classic`.
+
+```{r warning=F, message=F}
+library(ggpubr)                 # ggplot customization
+library(Rmisc)                  # basic statistics helper
+library(gganimate)              # animate plots
+library(scales)                 # ggplot scale customization
+library(icons)                  # icon library
+library(tidyverse)              # load all tidyverse packages
+theme_set(theme_classic())      # set classic theme
+download_fontawesome()
+```
+
+I will also read in the dataset as `df_raw` and look at the first few rows to get a sense of the variables I'm working with.
+
+```{r}
+# read in data
+df_raw <- read.csv('./data/songs_normalize.csv')
+# see first six rows of all variables
+head(df_raw)
+```
+
+Based on the data, it looks like I have 18 variables.
+These are further explained on the Kaggle page for this dataset.
+This is *a lot of data*, so it's useful to break down and organize the data depending on my analysis questions.
+This is where `dplyr` and `tidyr` come in handy.
+
+I also noticed that despite the dataset saying it includes songs from 2000 to 2019, I see some songs from before 2000 *and* after 2019 included.
+I will remove those observations.
+
+```{r}
+df <- subset(df_raw, df_raw$year >= 2000 & df_raw$year <= 2019)
+```
+
+## Analysis plan
+
+Since I have so much data, I'll want to narrow down my analysis questions for this demo.
+The main questions I will explore are:
+
+<!-- Q1 -->
+
+<p style="text-align: left;">
+
+<a class="fas fa-music" style="text-decoration:none"></a>   Which artists have the most hit songs?
+
+<!-- Q2 -->
+
+<p style="text-align: left;">
+
+<a class="fas fa-bolt" style="text-decoration:none"></a>   Are positive songs more energetic and danceable than negative songs?
+
+<!-- Q3 -->
+
+<p style="text-align: left;">
+
+<a class="fas fa-chart-line" style="text-decoration:none"></a>   Do songs in major and minor scale change in popularity over time?
+
+<!-- Q4 -->
+
+<p style="text-align: left;">
+
+<a class="fas fa-bullhorn" style="text-decoration:none"></a>   Are songs with explicit lyrics speechier than songs without explicit lyrics?
+
+<!-- Q5 -->
+
+<p style="text-align: left;">
+
+<a class="fas fa-drum" style="text-decoration:none"></a>   Does song tempo or duration influence song popularity?
+
+</p>
+
+Each of these questions will highlight a different data visualization method.
+In my experience, it can be helpful to test different plotting methods to find the best way to display results.
+
+### `r icons::fontawesome$solid$music` -- Which artists have the most hit songs?
+
+In order to find out which artists have the most hit songs, I need to count the number of songs by every artist in the data frame.
+I can easily do this using `%>%` (pipe) notation, which allows me to express a sequence of multiple operations.
+The pipe comes from the `magrittr` package, but `tidyverse` loads it automatically.
+Pipes allow me to write a step-by-step command that is executed in a certain order.
+
+Here, I gather the data contained in `df` and I ultimately want to store it in a new data frame called `artists`.
+To do this, I first group all the data by the unique artist name.
+I know that this is the first step because it's the first statement that comes after my initial `%>%`.
+Then, while grouping the data by artist, I can count the number of songs by grabbing the length of the `song` variable.
+
+Finally, I want to see a list of the top ten artists in descending order by the number of songs.
+
+```{r}
+artists <- df %>%                      # create new data frame
+  group_by(artist) %>%                 # group by unique artist name
+  summarize(SongCount = length(song))  # count the number of songs
+
+# sort list in descending order of number of songs
+artists <- arrange(artists, desc(SongCount))
+
+# print table of top 10 artists
+head(artists, n = 10)
+```
+
+<br>
+
+To visualize this information in a plot, I can save this information as a data frame and make a very simple plot using `ggplot2`.
+
+```{r fig.align = 'center'}
+# save top ten
+TopTen <- head(artists, n = 10)
+
+ggplot(TopTen, aes(x = artist, y = SongCount)) +
+  # outline bars in black, fill with light teal blue
+  geom_col(color = "black", fill = "#fcbc66", alpha = 0.8) +
+  # order bars in descending order and wrap text so last name appears on second line
+  scale_x_discrete(limits = TopTen$artist, labels = function(x) str_wrap(x, width = 10)) +
+  # label x axis
+  xlab(NULL) + 
+  # label y axis
+  ylab("Number of Hit Songs") + 
+  # write a descriptive title
+  ggtitle("Top Ten Artists with Hit Songs on Spotify from 2000 - 2019") +
+  # add song count value above each bar
+  geom_text(aes(label = SongCount), position = position_dodge(width = 0.9), vjust = -0.5) 
+```
+
+### `r icons::fontawesome$solid$bolt` -- Are positive songs more energetic and "danceable" than negative songs?
+
+In order to determine if positive songs are both more energetic and more "danceable" than negative songs, I first want to binarize valence into two categories -- positive and negative.
+The Kaggle dataset mentions that songs with a valence greater than 0.5 are considered more positive, while songs with a valence that is less than 0.5 are considered more negative.
+With this in mind, I will create a new variable called `valence.category` that reflects this binary split.
+
+I also want to get some statistical measures for my plot.
+Using `summarySE` from the `Rmisc` package, I can calculate mean, standard deviation, standard error, and 95% confidence intervals for a measurement variable while grouping by another variable.
+In this case, I want to calculate these statistical measures for both `danceability` and `energy` while grouping by the newly created `valence.category`.
+
+```{r fig.align = 'center'}
+# bin valence values into positive and negative categories
+df$valence.category[df$valence >= 0.5] <- "Positive"
+df$valence.category[df$valence < 0.5] <- "Negative"
+
+# get stats for danceability and energy (mean, 95% confidence interval, etc.)
+dance <- summarySE(df, measurevar = "danceability", groupvars = "valence.category")
+energy <- summarySE(df, measurevar = "energy", groupvars = "valence.category")
+```
+
+Now I can create my plot!
+I will be making a violin plot to show not only the mean difference between my valence groups, but also what the distribution is within my two valence categories.
+I will create a plot for `energy` and for `danceability`, and combine those into one joint plot using `ggarrange`.
+
+```{r fig.align = 'center'}
+# build violin plot for danceability
+dance.plot <- ggplot(data = df, aes(x = valence.category, y = danceability,
+                                    fill = valence.category, color = valence.category)) +
+  # violin plot
+  geom_violin(scale = "area", alpha = 0.8) +
+  # fill with my selected colors
+  scale_fill_manual(values = c("#8dc6bf","#fcbc66")) +
+  scale_color_manual(values = c("#8dc6bf","#fcbc66")) +
+  # add point for mean of each valence category
+  geom_point(data = dance, aes(x = valence.category, y = danceability), color = "black") +
+  # add 95% confidence intervals
+  geom_errorbar(data = dance, aes(ymin = danceability-ci, ymax = danceability+ci),
+                width = 0.25, position = "dodge", color = "black") +
+  # label x axis
+  xlab(NULL) +
+  # label y axis
+  ylab("Danceability") +
+  # don't include legend
+  theme(legend.position = "none")
+
+# build violin plot for energy
+energy.plot <- ggplot(data = df, aes(x = valence.category, y = energy,
+                                     fill = valence.category, color = valence.category)) +
+  # violin plot
+  geom_violin(scale = "area", alpha = 0.8) +
+  # fill with my selected colors
+  scale_fill_manual(values = c("#8dc6bf","#fcbc66")) +
+  scale_color_manual(values = c("#8dc6bf","#fcbc66")) +
+  # add point for mean of each valence category
+  geom_point(data = energy, aes(x = valence.category, y = energy), color = "black") +
+  # add 95% confidence intervals
+  geom_errorbar(data = energy, aes(ymin = energy-ci, ymax = energy+ci),
+                width = 0.25, position = "dodge", color = "black") +
+  # label x axis
+  xlab(NULL) +
+  # label y axis
+  ylab("Energy") +
+  # don't include legend
+  theme(legend.position = "none")
+
+# combine dance plot and energy plot using ggarrange
+plot <- ggarrange(dance.plot, energy.plot, ncol = 2)
+# add title and note to plot
+annotate_figure(plot, top = text_grob("Danceability and Energy in Positive and Negative Songs",
+                color = "black", face = "bold", size = 14),
+                bottom = text_grob("Bars indicate 95% confidence intervals around the mean.",
+                                   color = "black", face = "italic", size = 8))
+```
+
+It looks like positive songs are both more energetic and more danceable than negative songs, which makes sense.
+Interestingly, negative songs extend to both the lower and higher ends of the energy and danceability scales, while positive songs tend to be more densely clustered toward the higher end of the scales.
+
+### `r icons::fontawesome("chart-line", style = "solid")` -- Do songs in major and minor scales change in popularity over time?
+
+Here I'm interested to see if songs that are in major versus minor scale change in popularity over time.
+The major scale is a more commonly used scale, especially in Western music.
+On the flip, side the minor scale is used when musicians want to evoke a feeling of eeriness or suspense (some examples include "Stairway to Heaven" by Led Zeppelin and "Scarborough Fair" by Simon & Garfunkel).
+
+I first need to organize the data and calculate an average popularity score for each scale type (the `mode` variable) and for each year.
+Then I will create a new character variable called `mode.char` that indicates whether the scale is major or minor.
+
+```{r fig.align = 'center', warning = F, message = F}
+popularity <- df %>%
+  group_by(year,mode) %>%
+  summarize(MeanPopularity = mean(popularity))
+
+popularity$mode.char[popularity$mode == 1] <- "Major"
+popularity$mode.char[popularity$mode == 0] <- "Minor"
+```
+
+Now I can make my plot!
+Because I'm showing change over time, I decided to use the `gganimate` package to reveal each data point sequentially on an animated plot.
+
+```{r fig.align = 'center', warning = F, message = F}
+# make plot
+plot <- ggplot(popularity, aes(x = year, y = MeanPopularity, group = mode.char)) +
+  # animate to reveal points over time
+  transition_reveal(year) +
+  # add point for each year
+  geom_point(aes(color = mode.char), size = 2) +
+  # connect points with line
+  geom_line(aes(color = mode.char), size = 1.1) +
+  # show all years on the x-axis
+  scale_x_continuous(breaks = pretty_breaks(n=20)) +
+  # label x-axis and y-axis
+  ylab("Average Popularity") + xlab("Year") +
+  # add a descriptive title
+  ggtitle("Average Popularity of Major and Minor Songs from 2000 - 2019") +
+  # use my colors and change legend title
+  scale_color_manual(values = c("#8dc6bf","#fcbc66"), name = "Scale") +
+  # angle and move x-axis labels and text
+  theme(
+    axis.text.x = element_text(hjust = 1, angle = 45),
+    axis.title.x = element_text(vjust = -1)
+    )
+
+# animate
+animate(plot, duration = 8, fps = 20, renderer = gifski_renderer(), end_pause = 60)
+```
+
+### `r icons::fontawesome$solid$bullhorn` -- Are songs with explicit lyrics "speechier" than songs without explicit lyrics?
+
+In this dataset, "speechiness" is a measure of spoken words in a song.
+Songs with more exclusively speech-like contents (like a talk show, podcast, etc.) have scores between 0.66 and 1.
+Songs with a speechiness value between 0.33 and 0.66 describe tracks that contain both music and speech.
+This range is where I'd expect most of these songs within.
+Finally, songs with values below 0.33 represent instrumental songs and songs with more music than words.
+
+First, I want to see the range of speechiness values in my dataset to see where songs in this dataset fall.
+
+```{r}
+# find range of speechiness variable
+min <- min(df$speechiness)
+max <- max(df$speechiness)
+
+# show histogram of speechiness scores
+hist(df$speechiness, col = "#FF6347", xlab = "Speechiness", main = "Histogram of Speechiness Values")
+
+# print range
+paste0("Speechiness values range from ", min, " to ", max, " in this dataset.", sep = "")
+```
+
+Interesting!
+In this dataset, there are actually more songs that have more instrumental music.
+I wonder if songs that contain more speech *also* contain more explicit dialogue than songs with less speech.
+I can investigate this question using a density plot.
+
+```{r fig.align='center'}
+df$explicit.char[df$explicit == "False"] <- "No"
+df$explicit.char[df$explicit == "True"] <- "Yes"
+
+ggplot(df, aes(speechiness)) +
+  # create density plot to show distribution
+  geom_density(aes(fill = factor(explicit.char)), alpha = 0.8) +
+  # use my colors and rename legend
+  scale_fill_manual(values = c("#8dc6bf","#fcbc66"), name = "Explicit Lyrics") +
+  # label x-axis and y-axis
+  ylab("Density") + xlab("Average Track Speechiness") +
+  # add a descriptive title
+  ggtitle("Average Speechiness of Songs With and Without Explicit Lyrics")
+
+```
+
+From the density plot, we see that yes, songs with more speech and music tend to have more explicit language than songs with less speech!
+
+### `r icons::fontawesome$solid$drum` -- Does song tempo or duration influence song popularity?
+
+Finally, I want to investigate if there is a relationship between song tempo and song popularity or between song duration and song popularity.
+To do this, I'm going to run two simple linear regressions using base R's `lm` function.
+I want to see if song tempo (independent, predictor variable) influences song popularity (dependent, response variable).
+I also want to see if song duration in minutes influences song popularity.
+
+```{r fig.align='center', warning = F, message = F}
+# does song tempo influence popularity?
+ggplot(df, aes(x = tempo, y = popularity)) +
+  # show data points
+  geom_jitter(size = 1, shape = 1) +
+  # draw regression line
+  geom_smooth(method = "lm", color = "#8dc6bf", fill = "#8dc6bf") +
+  # label x-axis and y-axis
+  xlab("Tempo (Beats Per Minute)") + ylab("Average Popularity")
+
+# run a linear regression
+model1 <- lm(popularity ~ tempo, data = df)
+summary(model1)
+```
+
+Based on the regression results, there does not appear to be an effect of song tempo on popularity (p = .54).
+
+```{r fig.align='center', warning = F, message = F}
+# calculate song duration in minutes
+df$duration_min <- df$duration_ms/60000
+
+# does song duration influence popularity?
+ggplot(df, aes(x = duration_min, y = popularity)) +
+  # show data points
+  geom_jitter(size = 1, shape = 1) +
+  # draw regression line
+  geom_smooth(method = "lm", color = "#fcbc66", fill = "#fcbc66") +
+  # label x-axis and y-axis
+  xlab("Song Duration (Minutes)") + ylab("Average Popularity")
+
+# run a linear regression
+model2 <- lm(popularity ~ duration_min, data = df)
+summary(model2)
+```
+
+Based on the regression results, there is a significant effect of song duration on popularity (p = .024).
+As songs get longer, they increase in popularity.
+
+<!-- Add icon library -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">

@@ -33,6 +33,6 @@ Hi, I'm Helen!
 I'm a social neuroscientist with experience working in academic and industry settings. I have a B.S. from Tufts University and an M.Sc. from University College London, and I'm currently a Ph.D. student in the Social and Affective Neuroscience Lab at Temple University in Philadelphia, PA.
 
 <br>
-My CV is available [here](files/SchmidtCV-Website.pdf){target="_blank"}.
+My CV is available [here](files/Schmidt-CV.pdf){target="_blank"}.
 
 <!-- bootstrap icons https://icons.getbootstrap.com/ -->

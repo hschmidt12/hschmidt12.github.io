@@ -6,7 +6,7 @@ website:
   title: "Helen Schmidt"
   navbar:
     right:
-      - href: index.qmd
+      - href: index-home.qmd
         text: Home
       - href: about.qmd
         text: About

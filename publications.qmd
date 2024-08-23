@@ -35,18 +35,23 @@ Ulichney, V., **Schmidt, H.**, & Helion, C. (2024). *Personality and Social Psyc
 <a href="https://journals.sagepub.com/doi/10.1177/01461672231224991" target="_blank" class="btn btn-outline-success btn-sm" role="button">Article</a>&nbsp;&nbsp;<a href="https://osf.io/f4kav/" target="_blank" class="btn btn-outline-success btn-sm" role="button">Data + Code</a>
 
 ## Under Review
+<font size="2">*^#^ denotes equal contribution*</font>
 
 <!-- SURVIVOR BEHAVIORAL -->
 <font size="5">**Conversational Linguistic Features Inform Social-Relational Inference**</font>  
-**Schmidt, H.**, Tran, S., Medaglia, J.D., Ulichney, V., Mitchell, W.J., & Helion, C. (pre-print).
+**Schmidt, H.^#^**, Tran, S.^#^, Medaglia, J.D., Ulichney, V., Mitchell, W.J., & Helion, C. (pre-print).
 
 <a href="https://osf.io/preprints/psyarxiv/fn4my" target="_blank" class="btn btn-outline-success btn-sm" role="button">Pre-print</a>&nbsp;&nbsp;<a href="https://osf.io/8wqhb/" target="_blank" class="btn btn-outline-success btn-sm" role="button">Data + Code</a>
 
 <!-- SHARED REALITY -->
 <font size="5">**When and why does shared reality generalize?**</font>  
-Mahaphanit, W., Welker, C.L., **Schmidt, H.**, Chang, L.J., & Hawkins, R.X.D. (pre-print).
+Mahaphanit, W.^#^, Welker, C.L.^#^, **Schmidt, H.**, Chang, L.J., & Hawkins, R.X.D. (pre-print).
 
 <a href="https://osf.io/preprints/psyarxiv/g9p3e" target="_blank" class="btn btn-outline-success btn-sm" role="button">Pre-print</a>
+
+<!-- ORBIT EEG -->
+<font size="5">**Neural signatures of recollection are sensitive to memory quality and specific event features**</font>  
+Ladyka-Wojcik, N.^#^, **Schmidt, H.^#^**, Cooper, R.A.^#^, & Ritchey, M. (under review)
 
 <!-- FRIGHT NIGHT -->
 <font size="5">**Emotion regulation strategy use and forecasting in response to dynamic, multimodal stimuli**</font>  

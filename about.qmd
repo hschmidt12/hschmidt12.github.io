@@ -26,7 +26,6 @@ about:
       
 ---
 
-<br>
 I'm a psychology Ph.D. student in the [Social and Affective Neuroscience Lab](https://sites.temple.edu/sanlab/){target="_blank"} at Temple University, specializing in social neuroscience and quantitative methods. Under the guidance of Dr. Chelsea Helion, I study social and affective cognition by employing a multimodal analytic approach that combines behavioral and neuroimaging tools with machine learning and computational methods. My research is supported by an [NIH F31 Fellowship](https://researchtraining.nih.gov/programs/fellowships/F31) from the [National Heart, Lung, and Blood Institute (NHLBI)](https://www.nhlbi.nih.gov/). 
 
 I have a bachelor of science in biology from Tufts University and a master of science in clinical neuroscience from University College London. 

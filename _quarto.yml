@@ -4,11 +4,11 @@ project:
 
 website:
   title: "Helen Schmidt"
+  favicon: images/logo-light.png
   navbar:
+    pinned: true
     right:
       - href: index.qmd
-        text: Home
-      - href: about.qmd
         text: About
       - href: publications.qmd
         text: Publications

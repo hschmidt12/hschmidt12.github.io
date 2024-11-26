@@ -2,7 +2,7 @@
 title: "Publications"
 format: 
   html:
-    page-layout: full
+    toc: false
     link-external-newwindow: true
 ---
 
@@ -12,60 +12,79 @@ format:
 <!-- .callout-important = neuro -->
 <!-- Don't include icons (icon="false") -->
 
-If you would like to learn more about my research, there are links below to published and pre-print copies of articles as well as data and code repositories. A full list of my work can also be found on [Google Scholar](https://scholar.google.com/citations?user=Iw0DI-IAAAAJ&hl=en).
-
-## 2024
+## Published
 
 <!-- STORYTELLING -->
-<font size="5">**Storytelling changes the content and perceived value of event memories**</font>  
-Eckardt, D., Helion, C., **Schmidt, H.**, Chen, J., & Murty, V.P. (2024). *Cognition*. 
+::: {layout="[1, 3]" layout-valign="center"}
+![](images/short-hike.jpg){width="125px"}
 
-<a href="https://www.sciencedirect.com/science/article/abs/pii/S0010027724001707" target="_blank" class="btn btn-outline-success btn-sm" role="button">Article</a>&nbsp;&nbsp;<a href="https://osf.io/puyf4/" target="_blank" class="btn btn-outline-success btn-sm" role="button">Data + Code</a>
+<font size="4.5">Eckardt, D., Helion, C., **Schmidt, H.**, Chen, J., & Murty, V.P. (2024). **Storytelling changes the content and perceived value of event memories.** *Cognition*, *251*, 105884. &nbsp; <a href="https://www.sciencedirect.com/science/article/abs/pii/S0010027724001707" style="text-decoration:none">[paper]</a> &nbsp; <a href="https://osf.io/puyf4/"  style="text-decoration:none">[data + code]</a> </font>
+:::
+
+<br>
 
 <!-- NEUROECONOMICS CHAPTER -->
-<font size="5">**Integrated Neural Circuitry Supporting Emotion Regulation and Decision Making**</font>  
-**Schmidt, H.**, & Helion, C. (2024). Forthcoming chapter in *Neuroeconomics: Core Topics and Current Directions*.
+::: {layout="[1, 3]" layout-valign="center"}
+![](images/dm-er-brain.png){width="150px"}
 
-<a href="https://osf.io/preprints/psyarxiv/adf3w" target="_blank" class="btn btn-outline-success btn-sm" role="button">Pre-print</a>
+<font size="4.5">**Schmidt, H.** & Helion, C. (2024). **Integrated Neural Circuitry Supporting Emotion Regulation and Decision Making.** Forthcoming chapter in *Neuroeconomics: Core Topics and Current Directions*. &nbsp; <a href="https://osf.io/preprints/psyarxiv/adf3w"  style="text-decoration:none">[pre-print]</a></font>
+:::
+
+<br>
 
 <!-- MIDUS -->
-<font size="5">**Perceived Relational Support Is Associated With Everyday Positive, But Not Negative, Affectivity in a U.S. Sample**</font>  
-Ulichney, V., **Schmidt, H.**, & Helion, C. (2024). *Personality and Social Psychology Bulletin*. 
+::: {layout="[1, 3]" layout-valign="center"}
+![](images/midus.png){width="150px"}
 
-<a href="https://journals.sagepub.com/doi/10.1177/01461672231224991" target="_blank" class="btn btn-outline-success btn-sm" role="button">Article</a>&nbsp;&nbsp;<a href="https://osf.io/f4kav/" target="_blank" class="btn btn-outline-success btn-sm" role="button">Data + Code</a>
+<font size="4.5">Ulichney, V., **Schmidt, H.**, & Helion, C. (2024). **Perceived Relational Support Is Associated With Everyday Positive, But Not Negative, Affectivity in a U.S. Sample.** *Personality and Social Psychology Bulletin*. &nbsp; <a href="https://journals.sagepub.com/doi/10.1177/01461672231224991" style="text-decoration:none">[paper]</a> &nbsp; <a href="https://osf.io/f4kav/" style="text-decoration:none">[data + code]</a> </font>
+:::
 
-## Under Review
+## Under Review or In Preparation
 <font size="2">*^#^ denotes equal contribution*</font>
 
 <!-- SURVIVOR BEHAVIORAL -->
-<font size="5">**Conversational Linguistic Features Inform Social-Relational Inference**</font>  
-**Schmidt, H.^#^**, Tran, S.^#^, Medaglia, J.D., Ulichney, V., Mitchell, W.J., & Helion, C. (pre-print).
+::: {layout="[1, 3]" layout-valign="center"}
+![](images/survivor1.png){width="175px"}
 
-<a href="https://osf.io/preprints/psyarxiv/fn4my" target="_blank" class="btn btn-outline-success btn-sm" role="button">Pre-print</a>&nbsp;&nbsp;<a href="https://osf.io/8wqhb/" target="_blank" class="btn btn-outline-success btn-sm" role="button">Data + Code</a>
+<font size="4.5">**Schmidt, H.^#^**, Tran, S.^#^, Medaglia, J.D., Ulichney, V., Mitchell, W.J., & Helion, C. (under review). **Conversational Linguistic Features Inform Social-Relational Inference.** &nbsp; <a href="https://osf.io/preprints/psyarxiv/fn4my" style="text-decoration:none">[pre-print]</a> &nbsp; <a href="https://osf.io/8wqhb/"  style="text-decoration:none">[data + code]</a></font>
+:::
 
-<!-- SHARED REALITY -->
-<font size="5">**When and why does shared reality generalize?**</font>  
-Mahaphanit, W.^#^, Welker, C.L.^#^, **Schmidt, H.**, Chang, L.J., & Hawkins, R.X.D. (pre-print).
-
-<a href="https://osf.io/preprints/psyarxiv/g9p3e" target="_blank" class="btn btn-outline-success btn-sm" role="button">Pre-print</a>
+<br>
 
 <!-- ORBIT EEG -->
-<font size="5">**Neural signatures of recollection are sensitive to memory quality and specific event features**</font>  
-Ladyka-Wojcik, N.^#^, **Schmidt, H.^#^**, Cooper, R.A.^#^, & Ritchey, M. (under review)
+::: {layout="[1, 3]" layout-valign="center"}
+![](images/orbiteeg.png){width="175px"}
+
+<font size="4.5">Ladyka-Wojcik, N.^#^, **Schmidt, H.^#^**, Cooper, R.A.^#^, & Ritchey, M. (under review). **Neural signatures of recollection are sensitive to memory quality and specific event features.**</font>
+:::
+
+<br>
 
 <!-- FRIGHT NIGHT -->
-<font size="5">**Emotion regulation strategy use and forecasting in response to dynamic, multimodal stimuli**</font>  
-Mitchell, W.J., Stasiak, J., Martinez, S., Cliver, K., Gregory, D., Reisman, S., **Schmidt, H.**, Murty, V.P., & Helion, C. (pre-print).
+::: {layout="[1, 3]" layout-valign="center"}
+![](images/fright-night.png){width="175px"}
 
-<a href="https://europepmc.org/article/ppr/ppr577219" target="_blank" class="btn btn-outline-success btn-sm" role="button">Pre-print</a>&nbsp;&nbsp;<a href="https://osf.io/j5sku/?view_only=89d87669e7674096819c439ca109c483" target="_blank" class="btn btn-outline-success btn-sm" role="button">Data + Code</a>
+<font size="4.5">Mitchell, W.J., Stasiak, J., Martinez, S., Cliver, K., Gregory, D., Reisman, S., **Schmidt, H.**, Murty, V.P., & Helion, C. (in press). **Emotion regulation strategy use and forecasting in response to dynamic, multimodal stimuli.** *Journal of Experimental Psychology: General.* &nbsp; <a href="https://osf.io/preprints/psyarxiv/23wtz" style="text-decoration:none">[pre-print]</a> &nbsp; <a href="https://osf.io/j5sku/?view_only=89d87669e7674096819c439ca109c483"  style="text-decoration:none">[data + code]</a></font>
+:::
 
-## In Preparation
+<br>
+
+<!-- SHARED REALITY -->
+::: {layout="[1, 3]" layout-valign="center"}
+![](images/shared-reality.png){width="175px"}
+
+<font size="4.5">Mahaphanit, W.^#^, Welker, C.L.^#^, **Schmidt, H.**, Chang, L.J., & Hawkins, R.X.D. (in prep). **When and why does shared reality generalize?** &nbsp; <a href="https://osf.io/preprints/psyarxiv/g9p3e" style="text-decoration:none">[pre-print]</a></font>
+:::
+
+<br>
+
 
 <!-- ACTIVE VS PASSIVE -->
-<font size="5">**Neural Effects of Continuous Ratings During Active Engagement Within a Video fMRI Paradigm**</font>  
-Mitchell, W.J., **Schmidt, H.**, & Helion, C.
+<font size="4.5">Mitchell, W.J., **Schmidt, H.**, & Helion, C. (in prep). **Neural Effects of Continuous Ratings During Active Engagement Within a Video fMRI Paradigm.**</font>
+
+<br>
 
 <!-- MEMORY EXPRESSION -->
-<font size="5">**Linguistic properties of memory expression influence perceptions of veracity, despite being unrelated to memory accuracy**</font>  
-Martinez, S., Cliver, K., Mitchell, W.J., **Schmidt, H.**, Ulichney, V., Helion, C., Chein, J., & Murty, V.P.
+<font size="4.5">Martinez, S., Cliver, K., Mitchell, W.J., **Schmidt, H.**, Ulichney, V., Helion, C., Chein, J., & Murty, V.P. (in prep). **Linguistic properties of memory expression influence perceptions of veracity, despite being unrelated to memory accuracy.**</font>
+
 

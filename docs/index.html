@@ -24,12 +24,12 @@ ul.task-list li input[type="checkbox"] {
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./images/logo-light.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -83,10 +83,6 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
- <span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
@@ -135,6 +131,10 @@ ul.task-list li input[type="checkbox"] {
     <i class="bi bi-envelope"></i>
      <span class="about-link-text">Email</span>
   </a>
+  <a href="/files/Schmidt-CV.pdf" class="about-link" rel="" target="">
+    <i class="bi bi-paperclip"></i>
+     <span class="about-link-text">CV</span>
+  </a>
   <a href="https://github.com/hschmidt12" class="about-link" rel="" target="">
     <i class="bi bi-github"></i>
      <span class="about-link-text">GitHub</span>
@@ -147,18 +147,13 @@ ul.task-list li input[type="checkbox"] {
     <i class="bi bi-linkedin"></i>
      <span class="about-link-text">LinkedIn</span>
   </a>
-  <a href="https://twitter.com/_helenschmidt_" class="about-link" rel="" target="">
-    <i class="bi bi-twitter"></i>
-     <span class="about-link-text">Twitter</span>
-  </a>
 </div>
   </div>
   <div class="about-contents"><main class="content" id="quarto-document-content">
-<p><br></p>
 <p>Hi, I’m Helen!</p>
-<p><br> I’m a social neuroscientist with experience working in academic and industry settings. I have a B.S. from Tufts University and an M.Sc. from University College London, and I’m currently a Ph.D.&nbsp;student in the Social and Affective Neuroscience Lab at Temple University in Philadelphia, PA.</p>
-<p><br> My CV is available <a href="files/Schmidt-CV.pdf" target="_blank">here</a>.</p>
-<!-- bootstrap icons https://icons.getbootstrap.com/ -->
+<p>I’m a psychology Ph.D.&nbsp;candidate in the <a href="https://sites.temple.edu/sanlab/" style="text-decoration:none">Social and Affective Neuroscience Lab</a> at Temple University, specializing in quantitative methods. I study social and affective cognition by employing a multimodal analytic approach that combines behavioral and neuroimaging with machine learning and computational modeling. My research is supported by an <a href="https://researchtraining.nih.gov/programs/fellowships/F31" style="text-decoration:none">NIH F31 Fellowship</a> from the <a href="https://www.nhlbi.nih.gov/" style="text-decoration:none">National Heart, Lung, and Blood Institute (NHLBI)</a></p>
+<p>I have a bachelor of science in biology from Tufts University and a master of science in clinical neuroscience from University College London.</p>
+<p>Outside of the lab, I can be found reading books, traveling, drinking coffee, and spending time outside. I’m also a big data viz enthusiast - you can find some of my recent projects in my <a href="./portfolio.html" style="text-decoration:none">portfolio</a>. <!-- bootstrap icons https://icons.getbootstrap.com/ --></p>
 
 
 </main></div>
@@ -503,6 +498,20 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
 });
 </script>
 </div> <!-- /content -->

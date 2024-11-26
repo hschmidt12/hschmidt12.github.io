@@ -46,7 +46,7 @@
     "href": "index.html",
     "title": "Helen Schmidt",
     "section": "",
-    "text": "Hi, I’m Helen!\n I’m a social neuroscientist with experience working in academic and industry settings. I have a B.S. from Tufts University and an M.Sc. from University College London, and I’m currently a Ph.D. student in the Social and Affective Neuroscience Lab at Temple University in Philadelphia, PA.\n My CV is available here."
+    "text": "Hi, I’m Helen!\nI’m a psychology Ph.D. candidate in the Social and Affective Neuroscience Lab at Temple University, specializing in quantitative methods. I study social and affective cognition by employing a multimodal analytic approach that combines behavioral and neuroimaging with machine learning and computational modeling. My research is supported by an NIH F31 Fellowship from the National Heart, Lung, and Blood Institute (NHLBI)\nI have a bachelor of science in biology from Tufts University and a master of science in clinical neuroscience from University College London.\nOutside of the lab, I can be found reading books, traveling, drinking coffee, and spending time outside. I’m also a big data viz enthusiast - you can find some of my recent projects in my portfolio."
   },
   {
     "objectID": "posts/2023-04-01-Map-Challenge/index.html",
@@ -221,21 +221,21 @@
     "href": "publications.html",
     "title": "Publications",
     "section": "",
-    "text": "If you would like to learn more about my research, there are links below to published and pre-print copies of articles as well as data and code repositories. A full list of my work can also be found on Google Scholar."
+    "text": "Eckardt, D., Helion, C., Schmidt, H., Chen, J., & Murty, V.P. (2024). Storytelling changes the content and perceived value of event memories. Cognition, 251, 105884.   [paper]   [data + code] \n\n\n\n\n\n\n\n\n\n\n\nSchmidt, H. & Helion, C. (2024). Integrated Neural Circuitry Supporting Emotion Regulation and Decision Making. Forthcoming chapter in Neuroeconomics: Core Topics and Current Directions.   [pre-print]\n\n\n\n\n\n\n\n\n\n\n\nUlichney, V., Schmidt, H., & Helion, C. (2024). Perceived Relational Support Is Associated With Everyday Positive, But Not Negative, Affectivity in a U.S. Sample. Personality and Social Psychology Bulletin.   [paper]   [data + code]"
   },
   {
     "objectID": "publications.html#section",
     "href": "publications.html#section",
     "title": "Publications",
-    "section": "2024",
-    "text": "2024\n\nStorytelling changes the content and perceived value of event memories\nEckardt, D., Helion, C., Schmidt, H., Chen, J., & Murty, V.P. (2024). Cognition.\nArticle  Data + Code\n\nIntegrated Neural Circuitry Supporting Emotion Regulation and Decision Making\nSchmidt, H., & Helion, C. (2024). Forthcoming chapter in Neuroeconomics: Core Topics and Current Directions.\nPre-print\n\nPerceived Relational Support Is Associated With Everyday Positive, But Not Negative, Affectivity in a U.S. Sample\nUlichney, V., Schmidt, H., & Helion, C. (2024). Personality and Social Psychology Bulletin.\nArticle  Data + Code"
+    "section": "",
+    "text": "Storytelling changes the content and perceived value of event memories\nEckardt, D., Helion, C., Schmidt, H., Chen, J., & Murty, V.P. (2024). Cognition.\nArticle  Data + Code\n\nIntegrated Neural Circuitry Supporting Emotion Regulation and Decision Making\nSchmidt, H., & Helion, C. (2024). Forthcoming chapter in Neuroeconomics: Core Topics and Current Directions.\nPre-print\n\nPerceived Relational Support Is Associated With Everyday Positive, But Not Negative, Affectivity in a U.S. Sample\nUlichney, V., Schmidt, H., & Helion, C. (2024). Personality and Social Psychology Bulletin.\nArticle  Data + Code"
   },
   {
     "objectID": "publications.html#under-review",
     "href": "publications.html#under-review",
     "title": "Publications",
     "section": "Under Review",
-    "text": "Under Review\n# denotes equal contribution\n\nConversational Linguistic Features Inform Social-Relational Inference\nSchmidt, H.#, Tran, S.#, Medaglia, J.D., Ulichney, V., Mitchell, W.J., & Helion, C. (pre-print).\nPre-print  Data + Code\n\nWhen and why does shared reality generalize?\nMahaphanit, W.#, Welker, C.L.#, Schmidt, H., Chang, L.J., & Hawkins, R.X.D. (pre-print).\nPre-print\n\nNeural signatures of recollection are sensitive to memory quality and specific event features\nLadyka-Wojcik, N.#, Schmidt, H.#, Cooper, R.A.#, & Ritchey, M. (under review)\n\nEmotion regulation strategy use and forecasting in response to dynamic, multimodal stimuli\nMitchell, W.J., Stasiak, J., Martinez, S., Cliver, K., Gregory, D., Reisman, S., Schmidt, H., Murty, V.P., & Helion, C. (pre-print).\nPre-print  Data + Code"
+    "text": "Under Review\n# denotes equal contribution\n\n\n\n\n\n\n\nSchmidt, H.#, Tran, S.#, Medaglia, J.D., Ulichney, V., Mitchell, W.J., & Helion, C. (under review). Conversational Linguistic Features Inform Social-Relational Inference.   [pre-print] [data + code]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhen and why does shared reality generalize?\nMahaphanit, W.#, Welker, C.L.#, Schmidt, H., Chang, L.J., & Hawkins, R.X.D. (pre-print).\nPre-print\n\nNeural signatures of recollection are sensitive to memory quality and specific event features\nLadyka-Wojcik, N.#, Schmidt, H.#, Cooper, R.A.#, & Ritchey, M. (under review)\n\nEmotion regulation strategy use and forecasting in response to dynamic, multimodal stimuli\nMitchell, W.J., Stasiak, J., Martinez, S., Cliver, K., Gregory, D., Reisman, S., Schmidt, H., Murty, V.P., & Helion, C. (pre-print).\nPre-print  Data + Code"
   },
   {
     "objectID": "publications.html#in-preparation",
@@ -250,5 +250,26 @@
     "title": "Portfolio",
     "section": "",
     "text": "Geospatial Analysis & Cartography in R\n\n\n\n\n\n\n\nMaps\n\n\nR\n\n\nOpen Data\n\n\n\n\nA tutorial created for the 2024 Temple University Coding Outreach Group summer workshop series.\n\n\n\n\n\n\nAug 1, 2024\n\n\nHelen Schmidt\n\n\n\n\n\n\n  \n\n\n\n\n30 Day Map Challenge\n\n\n\n\n\n\n\nMaps\n\n\nR\n\n\nOpen Data\n\n\n\n\nThroughout November 2023, I took part in my second #30DayMapChallenge, a challenge to create original maps using geospatial data. Check out the new maps!\n\n\n\n\n\n\nDec 1, 2023\n\n\nHelen Schmidt\n\n\n\n\n\n\n  \n\n\n\n\nGenerating Art in R\n\n\n\n\n\n\n\nData Viz\n\n\nR\n\n\n\n\nThis demo outlines easy ways to generate art in R using random parameter formulas.\n\n\n\n\n\n\nAug 4, 2023\n\n\nHelen Schmidt\n\n\n\n\n\n\n  \n\n\n\n\nIntroduction to Machine Learning in R\n\n\n\n\n\n\n\nR\n\n\nOpen Data\n\n\nMachine Learning\n\n\n\n\nA tutorial created for the 2023 Temple University Coding Outreach Group summer workshop series.\n\n\n\n\n\n\nJun 15, 2023\n\n\nHelen Schmidt\n\n\n\n\n\n\n  \n\n\n\n\n30 Day Chart Challenge\n\n\n\n\n\n\n\nData Viz\n\n\nR\n\n\nOpen Data\n\n\n\n\nIn April 2023, I took part in the #30DayChartChallenge, a month-long challenge to create creative data visualizations around a selection of topics.\n\n\n\n\n\n\nMay 1, 2023\n\n\nHelen Schmidt\n\n\n\n\n\n\n  \n\n\n\n\n30 Day Map Challenge\n\n\n\n\n\n\n\nMaps\n\n\nR\n\n\nOpen Data\n\n\n\n\nThroughout November 2022, I took part in the #30DayMapChallenge, a month-long challenge to create original maps using geospatial data. Check out the results!\n\n\n\n\n\n\nApr 1, 2023\n\n\nHelen Schmidt\n\n\n\n\n\n\n  \n\n\n\n\nData Visualizations in R\n\n\n\n\n\n\n\nData Viz\n\n\nR\n\n\nOpen Data\n\n\n\n\nUsing open-source data and tidyverse packages, this demo explores different data wrangling and plotting techniques in R.\n\n\n\n\n\n\nMar 7, 2023\n\n\nHelen Schmidt\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "publications.html#published",
+    "href": "publications.html#published",
+    "title": "Publications",
+    "section": "",
+    "text": "Eckardt, D., Helion, C., Schmidt, H., Chen, J., & Murty, V.P. (2024). Storytelling changes the content and perceived value of event memories. Cognition, 251, 105884.   [paper]   [data + code] \n\n\n\n\n\n\n\n\n\n\n\nSchmidt, H. & Helion, C. (2024). Integrated Neural Circuitry Supporting Emotion Regulation and Decision Making. Forthcoming chapter in Neuroeconomics: Core Topics and Current Directions.   [pre-print]\n\n\n\n\n\n\n\n\n\n\n\nUlichney, V., Schmidt, H., & Helion, C. (2024). Perceived Relational Support Is Associated With Everyday Positive, But Not Negative, Affectivity in a U.S. Sample. Personality and Social Psychology Bulletin.   [paper]   [data + code]"
+  },
+  {
+    "objectID": "publications.html#under-review-or-in-preparation",
+    "href": "publications.html#under-review-or-in-preparation",
+    "title": "Publications",
+    "section": "Under Review or In Preparation",
+    "text": "Under Review or In Preparation\n# denotes equal contribution\n\n\n\n\n\n\n\nSchmidt, H.#, Tran, S.#, Medaglia, J.D., Ulichney, V., Mitchell, W.J., & Helion, C. (under review). Conversational Linguistic Features Inform Social-Relational Inference.   [pre-print]   [data + code]\n\n\n\n\n\n\n\n\n\n\n\nLadyka-Wojcik, N.#, Schmidt, H.#, Cooper, R.A.#, & Ritchey, M. (under review). Neural signatures of recollection are sensitive to memory quality and specific event features.\n\n\n\n\n\n\n\n\n\n\n\nMitchell, W.J., Stasiak, J., Martinez, S., Cliver, K., Gregory, D., Reisman, S., Schmidt, H., Murty, V.P., & Helion, C. (in press). Emotion regulation strategy use and forecasting in response to dynamic, multimodal stimuli. Journal of Experimental Psychology: General.   [pre-print]   [data + code]\n\n\n\n\n\n\n\n\n\n\n\nMahaphanit, W.#, Welker, C.L.#, Schmidt, H., Chang, L.J., & Hawkins, R.X.D. (in prep). When and why does shared reality generalize?   [pre-print]\n\n\n\n\n\nMitchell, W.J., Schmidt, H., & Helion, C. (in prep). Neural Effects of Continuous Ratings During Active Engagement Within a Video fMRI Paradigm.\n\n\nMartinez, S., Cliver, K., Mitchell, W.J., Schmidt, H., Ulichney, V., Helion, C., Chein, J., & Murty, V.P. (in prep). Linguistic properties of memory expression influence perceptions of veracity, despite being unrelated to memory accuracy."
+  },
+  {
+    "objectID": "publications.html#under-review-or-in-preparation-1",
+    "href": "publications.html#under-review-or-in-preparation-1",
+    "title": "Publications",
+    "section": "Under Review or In Preparation",
+    "text": "Under Review or In Preparation\n\nNeural Effects of Continuous Ratings During Active Engagement Within a Video fMRI Paradigm\nMitchell, W.J., Schmidt, H., & Helion, C.\n\nLinguistic properties of memory expression influence perceptions of veracity, despite being unrelated to memory accuracy\nMartinez, S., Cliver, K., Mitchell, W.J., Schmidt, H., Ulichney, V., Helion, C., Chein, J., & Murty, V.P."
   }
 ]

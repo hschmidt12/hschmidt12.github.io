@@ -223,4 +223,34 @@ format:
   }
 </script>
 
+<br>
+
+<!-- CONVERSATION STRUCTURES -->
+<font size="5">
+  <strong>Dynamics of topic exploration in conversation</strong> 
+</font>  
+<font size="3">
+  <strong>Helen Schmidt</strong>, Claire Augusta Bergey, Changyi Zhou, Chelsea Helion, & Robert D. Hawkins   
+  in prep &nbsp;&bull;&nbsp; <i>Submitted to 47th Annual Conference of the Cognitive Science Society</i> <br><br>
+</font>
+  <!-- <a href="https://osf.io/preprints/psyarxiv/g9p3e" style="text-decoration:none" class="btn btn-outline-success btn-sm">pre-print</a> &nbsp;  -->
+  <button onclick="toggleAbstractCS()" style="text-decoration:none" class="btn btn-outline-success btn-sm">abstract</button>
+</font>
+
+<div id="abstractCS" style="display:none; margin-top: 10px; font-size: 14px;">
+  <p><strong>Abstract:</strong> Conversations are intricately structured forms of social interaction, containing interconnected topics with nested levels of semantic specificity. What principles govern how we move through this vast topic space with social partners? To characterize these dynamics, we introduce a dataset of annotated topic shifts from 1505 annotators on 200 transcripts (transcribed video call conversations between strangers; Reece et al., 2023). Conversational dyads had fairly stochastic transitions between topics, with loose systematicity (e.g., talk of preferences was often followed by talk of location). Examining trajectories within each topic, we find that dyads are initially concentrated in semantic space before spreading out to dispersed regions as topics progress. This pattern holds over entire conversations, providing quantitative evidence that conversations have nested levels of increasing idiosyncrasy: conversations and topics often start similarly, but disperse over time. Overall, our findings provide evidence that interlocutors explore conceptual space systematically, giving layered structure to idle talk.</p>
+</div>
+
+<script>
+  function toggleAbstractCS() {
+    var abstractDiv = document.getElementById('abstractCS');
+    // Toggle the display property between 'none' and 'block'
+    if (abstractDiv.style.display === 'none' || abstractDiv.style.display === '') {
+      abstractDiv.style.display = 'block';
+    } else {
+      abstractDiv.style.display = 'none';
+    }
+  }
+</script>
+
 

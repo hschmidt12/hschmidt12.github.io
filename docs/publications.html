@@ -139,8 +139,8 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="published-in-press">Published / In Press</h2>
 <p><font size="2"><em><sup>#</sup> denotes equal contribution</em></font></p>
 <!-- SURVIVOR -->
-<p><font size="5"> <strong>Conversational Linguistic Features Inform Social-Relational Inference</strong> </font><br>
-<font size="3"> <strong>Helen Schmidt<sup>#</sup></strong>, Sophia Tran<sup>#</sup>, John D. Medaglia, Virginia Ulichney, William J. Mitchell, &amp; Chelsea Helion.<br>
+<p><font size="5"> <strong>Conversational linguistic features inform social-relational inference</strong> </font><br>
+<font size="3"> <strong>Helen Schmidt<sup>#</sup></strong>, Sophia Tran<sup>#</sup>, John D. Medaglia, Virginia Ulichney, William J. Mitchell, &amp; Chelsea Helion<br>
 in press &nbsp;•&nbsp; <i>Psychonomic Bulletin &amp; Review</i> <br><br> </font> <a href="https://osf.io/preprints/psyarxiv/fn4my" style="text-decoration:none" class="btn btn-outline-success btn-sm">pre-print</a> &nbsp; <a href="https://osf.io/8wqhb/" style="text-decoration:none" class="btn btn-outline-success btn-sm">data + code</a> &nbsp; <button onclick="toggleAbstractSurvivor()" style="text-decoration:none" class="btn btn-outline-success btn-sm">abstract</button> </p>
 <div id="abstractSurvivor" style="display:none; margin-top: 10px; font-size: 14px;">
 <p>
@@ -150,6 +150,27 @@ in press &nbsp;•&nbsp; <i>Psychonomic Bulletin &amp; Review</i> <br><br> </fon
 <script>
   function toggleAbstractSurvivor() {
     var abstractDiv = document.getElementById('abstractSurvivor');
+    // Toggle the display property between 'none' and 'block'
+    if (abstractDiv.style.display === 'none' || abstractDiv.style.display === '') {
+      abstractDiv.style.display = 'block';
+    } else {
+      abstractDiv.style.display = 'none';
+    }
+  }
+</script>
+<p><br></p>
+<!-- LANGUAGE FRIGHT NIGHT -->
+<p><font size="5"> <strong>Linguistic properties of memory expression differentially relate to accuracy, specificity, and perceived veracity</strong> </font><br>
+<font size="3"> Steven A. Martinez, Kate Cliver, William J. Mitchell, <strong>Helen Schmidt</strong>, Virginia Ulichney, Chelsea Helion, Jason Chein, &amp; Vishnu Murty<br>
+2025 &nbsp;•&nbsp; <i>Psychonomic Bulletin &amp; Review</i> <br><br> </font> <a href="https://doi.org/10.3758/s13423-025-02667-9" style="text-decoration:none" class="btn btn-outline-success btn-sm">paper</a> &nbsp; <a href="https://osf.io/fua6y/?view_only=0d1d22fdfe484fc6a10180f8157c2909" style="text-decoration:none" class="btn btn-outline-success btn-sm">data + code</a> &nbsp; <button onclick="toggleAbstractFNLanguage()" style="text-decoration:none" class="btn btn-outline-success btn-sm">abstract</button> </p>
+<div id="abstractFNLanguage" style="display:none; margin-top: 10px; font-size: 14px;">
+<p>
+<strong>Abstract:</strong> When communicating our memories to others, we use specific language to represent and express those memories. However, whether the linguistic properties associated with memory expression, such as communication styles, relate to memory accuracy and specificity, and how threat affects these relationships, is unclear. Further, whether communication styles influence how others perceive memories is unknown. In Experiment 1, participants (n = 55) recalled a visit to an in-person haunted house, which included low- and high-threat segments. We examined how two distinct features of memory, episodic specificity and temporal-order accuracy, related to linguistic markers of genuineness (i.e., Authenticity) and formality (i.e., Analytical Thinking) during free recall. Results revealed that Authenticity and Analytical Thinking were both elevated when recalling high- versus low-threat memories. However, memory communication styles related to episodic specificity and temporal-order accuracy differentially. Increased recollection of episodic details was negatively related to Authenticity, but positively related to Analytical Thinking. Temporal-order accuracy was positively related to Authenticity, but unrelated to Analytical Thinking. In Experiment 2, naïve readers (n = 499) read pairs of haunted-house recollections given by participants in Experiment 1 and indicated which memory they perceived as more accurate. Results showed that greater Analytical Thinking and greater episodic specificity during free recall increased perceptions of accuracy; whereas Authenticity during free recall and temporal-order memory did not influence perceptions of accuracy. Together, these findings highlight the relationship between communication styles and distinct features of memory, and how memory expression can influence others’ perceptions of communicated memories.
+</p>
+</div>
+<script>
+  function toggleAbstractFNLanguage() {
+    var abstractDiv = document.getElementById('abstractFNLanguage');
     // Toggle the display property between 'none' and 'block'
     if (abstractDiv.style.display === 'none' || abstractDiv.style.display === '') {
       abstractDiv.style.display = 'block';

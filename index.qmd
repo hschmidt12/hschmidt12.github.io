@@ -26,7 +26,7 @@ format:
 ---
 Hi, I'm Helen!
 
-I'm a psychology Ph.D. candidate in the [Social and Affective Neuroscience Lab](https://sites.temple.edu/sanlab/){style="text-decoration:none"} at Temple University, specializing in quantitative methods. I study social and affective cognition by employing a multimodal analytic approach that combines behavioral experimentation and neuroimaging with machine learning and computational modeling. My research is supported by an [NIH F31 Fellowship](https://researchtraining.nih.gov/programs/fellowships/F31){style="text-decoration:none"} from the [National Heart, Lung, and Blood Institute (NHLBI)](https://www.nhlbi.nih.gov/){style="text-decoration:none"} 
+I'm a psychology Ph.D. candidate in the [Social and Affective Neuroscience Lab](https://sites.temple.edu/sanlab/){style="text-decoration:none"} at Temple University, specializing in quantitative methods. I study social and affective cognition by employing a multimodal analytic approach that combines behavioral experimentation and neuroimaging with machine learning and computational modeling. My research is supported by an [NIH F31 Fellowship](https://researchtraining.nih.gov/programs/fellowships/F31){style="text-decoration:none"} from the [National Heart, Lung, and Blood Institute (NHLBI)](https://www.nhlbi.nih.gov/){style="text-decoration:none"}. 
 
 I have a bachelor of science in biology from Tufts University and a master of science in clinical neuroscience from University College London. 
 

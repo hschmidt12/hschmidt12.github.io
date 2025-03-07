@@ -15,9 +15,9 @@ format:
 </font>  
 <font size="3">
   <strong>Helen Schmidt^#^</strong>, Sophia Tran^#^, John D. Medaglia, Virginia Ulichney, William J. Mitchell, & Chelsea Helion  
-  in press &nbsp;&bull;&nbsp; <i>Psychonomic Bulletin & Review</i> <br><br>
+  2025 &nbsp;&bull;&nbsp; <i>Psychonomic Bulletin & Review</i> <br><br>
 </font>
-  <a href="https://osf.io/preprints/psyarxiv/fn4my" style="text-decoration:none" class="btn btn-outline-success btn-sm">pre-print</a> &nbsp; 
+  <a href="https://doi.org/10.3758/s13423-025-02654-0" style="text-decoration:none" class="btn btn-outline-success btn-sm">paper</a> &nbsp; 
   <a href="https://osf.io/8wqhb/"  style="text-decoration:none" class="btn btn-outline-success btn-sm">data + code</a> &nbsp;
   <button onclick="toggleAbstractSurvivor()" style="text-decoration:none" class="btn btn-outline-success btn-sm">abstract</button>
 </font>

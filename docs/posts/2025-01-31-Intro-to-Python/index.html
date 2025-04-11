@@ -720,7 +720,7 @@ memory usage: 26.0+ KB</code></pre>
 <span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="co"># show</span></span>
 <span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>median_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>np.float64(242.5)</code></pre>
+<pre><code>242.5</code></pre>
 </div>
 </div>
 <p>We can then combine our median with an if-else statement to create a new variable and populate each row with big or small. To tell Python to perform this if-else statement row-by-row, we need to include <code>lambda row:</code> within an <code>apply()</code> statement.</p>
@@ -805,7 +805,7 @@ Index: 5, Length: 229.3, Group: small</code></pre>
 <span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a><span class="co"># print results</span></span>
 <span id="cb59-14"><a href="#cb59-14" aria-hidden="true" tabindex="-1"></a>anova_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>F_onewayResult(statistic=np.float64(397.29943741282796), pvalue=np.float64(1.3809842053151752e-88))</code></pre>
+<pre><code>F_onewayResult(statistic=397.29943741282796, pvalue=1.3809842053151752e-88)</code></pre>
 </div>
 </div>
 </section>
@@ -824,7 +824,7 @@ Index: 5, Length: 229.3, Group: small</code></pre>
 <span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a><span class="co"># print results</span></span>
 <span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>ttest_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>TtestResult(statistic=np.float64(-24.286066500471392), pvalue=np.float64(7.821528746388473e-66), df=np.float64(233.5085891130877))</code></pre>
+<pre><code>TtestResult(statistic=-24.286066500471392, pvalue=7.821528746388473e-66, df=233.5085891130877)</code></pre>
 </div>
 </div>
 </section>
@@ -847,7 +847,7 @@ Index: 5, Length: 229.3, Group: small</code></pre>
 <span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a><span class="co"># print slope and p-value</span></span>
 <span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'slope: </span><span class="sc">{</span>slope<span class="sc">}</span><span class="ss">, p-value: </span><span class="sc">{</span>p_value<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>slope: 0.2548247184821524, p-value: 7.211340708097449e-42</code></pre>
+<pre><code>slope: 0.2548247184821525, p-value: 7.211340708096832e-42</code></pre>
 </div>
 </div>
 </section>

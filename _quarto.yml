@@ -2,7 +2,7 @@ project:
   type: website
   output-dir: docs
   resources: 
-    - CNAME
+    - "CNAME"
 
 website:
   title: "Helen Schmidt"
@@ -23,10 +23,11 @@ website:
 
 format:
   html:
-    theme: 
-      light: flatly
-      dark: darkly
-    toc: true
+    theme: flatly
+    toc: false
+    grid:
+      sidebar-width: 150px
+      margin-width: 200px
     
 
 editor: source

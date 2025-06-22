@@ -2,289 +2,98 @@
 title: "Publications"
 format: 
   html:
-    toc: false
     link-external-newwindow: true
+aliases: 
+  - /publications
+css: website.css
 ---
+<p style="font-size: 0.7rem;"><em>* denotes equal contribution</em></p>
 
-## Published / In Press
-<font size="2">*^#^ denotes equal contribution*</font>
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results = "asis"}
+# formatting inspired by the fantastic Maureen Ritchey: 
+# https://github.com/memobc/memobc.github.io
 
-<!-- ORBIT EEG -->
-<font size="5">
-  <strong>Neural signatures of recollection are sensitive to memory quality and specific event features</strong> 
-</font>  
-<font size="3">
-  Natalia Ladyka-Wojcik^#^, <strong>Helen Schmidt^#^</strong>, Rose A. Cooper^#^, & Maureen Ritchey   
-  in press &nbsp;&bull;&nbsp; <i>Journal of Cognitive Neuroscience</i> <br><br>
-</font>
-  <a href="https://doi.org/10.1101/2025.03.18.643924" style="text-decoration:none" class="btn btn-outline-success btn-sm">pre-print</a> &nbsp;
-  <a href="https://github.com/memobc/paper-orbiteeg"  style="text-decoration:none" class="btn btn-outline-success btn-sm">data + code</a> &nbsp;
-  <button onclick="toggleAbstractOrbit()" style="text-decoration:none" class="btn btn-outline-success btn-sm">abstract</button>
-</font>
+library(tidyverse)
+library(htmltools)
+library(glue)
+library(knitr)
 
-<div id="abstractOrbit" style="display:none; margin-top: 10px; font-size: 14px;">
-  <p><strong>Abstract:</strong> Episodic memories reflect a bound representation of multimodal features that can be recollected with varying levels of precision. Recent fMRI investigations have demonstrated that the precision and content of information retrieved from memory engage a network of posterior medial temporal and parietal regions co-activated with the hippocampus. Yet, comparatively little is known about how memory content and precision affect common neural signatures of memory captured by electroencephalography (EEG), where recollection has been associated with changes in event-related potential (ERP) and oscillatory measures of neural activity. Here, we used a multi-feature paradigm previously reported in Cooper & Ritchey (2019) with continuous measures of memory, in conjunction with scalp EEG, to characterize the content and quality of information that drives ERP and oscillatory markers of episodic memory. A common signature of memory retrieval in left posterior regions, called the late positive component (LPC), was sensitive to overall memory quality and also to precision of recollection for spatial features. Analysis of oscillatory markers during recollection revealed that alpha/beta desynchronization was modulated by overall memory quality and also by individual features in memory. Importantly, we found evidence of a relationship between these two neural markers of memory retrieval, suggesting that they may represent complementary aspects of the recollection experience. These findings demonstrate how time-sensitive and dynamic processes identified with EEG correspond to overall episodic recollection, and also to the retrieval of precise features in memory.</p>
-</div>
+# read in publication csv 
+papers <- read_csv("publications/publications.csv")
 
-<script>
-  function toggleAbstractOrbit() {
-    var abstractDiv = document.getElementById('abstractOrbit');
-    // Toggle the display property between 'none' and 'block'
-    if (abstractDiv.style.display === 'none' || abstractDiv.style.display === '') {
-      abstractDiv.style.display = 'block';
-    } else {
-      abstractDiv.style.display = 'none';
-    }
+# clean up text to ensure all characters encode correctly
+clean_text <- function(x) {
+  if (is.character(x)) iconv(x, from = "", to = "UTF-8", sub = "byte") else x}
+papers <- papers |> mutate(across(everything(), clean_text))
+
+# generate HTML by year
+cards_by_year <- map_chr(
+  sort(unique(papers$year), decreasing = TRUE),
+  function(y) {
+    papers_year <- papers |> filter(year == y)
+    paper_cards <- map_chr(1:nrow(papers_year), function(i) {
+      row <- papers_year[i, ]
+      title <- row$title
+      authors <- row$authors
+      journal <- row$journal
+      paper_link <- row$paper_url
+      data_code_link <- row$data_url
+      abstract <- row$abstract
+      
+      # make y safe for HTML
+      safe_y <- gsub("[^a-zA-Z0-9]", "", y) # removes spaces, punctuation, etc.
+
+      reference <- paste0(authors, ". (", y, "). <i>", journal, "</i>.")
+      abstract_id <- paste0("abstract", safe_y, "_", i)
+      toggle_function <- paste0("toggleAbstract", safe_y, "_", i)
+
+      code_icon <- if (!is.na(data_code_link) && data_code_link != "") {
+        glue('<a href="{data_code_link}" class="icon-link" target="_blank" title="data & code"><i class="bi bi-code-slash"></i></a>')
+      } else { "" }
+
+      abstract_icon <- if (!is.na(abstract) && abstract != "") {
+        glue('<a href="#" class="icon-link" onclick="event.preventDefault(); {toggle_function}()" title="show abstract"><i class="bi bi-card-text"></i></a>')
+      } else { "" }
+
+      abstract_html <- if (!is.na(abstract) && abstract != "") {
+        glue('<div id="{abstract_id}" class="abstract-text" style="display:none;">
+                <p><strong>Abstract:</strong> {abstract}</p>
+              </div>
+              <script>
+                function {toggle_function}() {{
+                  var abstractDiv = document.getElementById("{abstract_id}");
+                  if (abstractDiv.style.display === "none" || abstractDiv.style.display === "") {{
+                    abstractDiv.style.display = "block";
+                  }} else {{
+                    abstractDiv.style.display = "none";
+                  }}
+                }}
+              </script>')
+      } else { "" }
+
+      glue('<div class="paper-row">
+              <div class="paper-title">
+                <a href="{paper_link}" class="paper-link" target="_blank">{title}</a>
+                <p class="paper-ref">{reference} {code_icon} {abstract_icon}</p>
+                {abstract_html}
+              </div>
+            </div>')
+    })
+
+    glue('
+  <div class="year-group">
+    <div class="paper-year">{y}</div>
+    <div class="year-papers">
+      {paste(paper_cards, collapse = "")}
+    </div>
+  </div>
+  <div class="year-divider"></div>')
   }
-</script>
+)
 
-<br>
+asis_output(paste(cards_by_year, collapse = "\n"))
 
-<!-- SURVIVOR -->
-<font size="5">
-  <strong>Conversational linguistic features inform social-relational inference</strong> 
-</font>  
-<font size="3">
-  <strong>Helen Schmidt^#^</strong>, Sophia Tran^#^, John D. Medaglia, Virginia Ulichney, William J. Mitchell, & Chelsea Helion  
-  2025 &nbsp;&bull;&nbsp; <i>Psychonomic Bulletin & Review</i> <br><br>
-</font>
-  <a href="https://doi.org/10.3758/s13423-025-02654-0" style="text-decoration:none" class="btn btn-outline-success btn-sm">paper</a> &nbsp; 
-  <a href="https://osf.io/8wqhb/"  style="text-decoration:none" class="btn btn-outline-success btn-sm">data + code</a> &nbsp;
-  <button onclick="toggleAbstractSurvivor()" style="text-decoration:none" class="btn btn-outline-success btn-sm">abstract</button>
-</font>
-
-<div id="abstractSurvivor" style="display:none; margin-top: 10px; font-size: 14px;">
-  <p><strong>Abstract:</strong> Whether it is the first day of school or a new job, individuals often find themselves in situations where they must learn the structure of existing social relationships. However, the mechanisms through which individuals evaluate the strength and nature of these existing relationships – social-relational inference – remain unclear. We posit that linguistic features of conversations may help individuals evaluate social relationships and may be associated with social-relational inference. Leveraging a naturalistic behavioral experiment (57 adults; 34,735 observations), participants watched a mid-season episode of a reality television show and evaluated the observed dyadic relationships between contestants. We employed novel person- and stimulus-focused approaches to 1) investigate social-relational inference similarity between participants, 2) examine the association between distinct linguistic features and social-relational inference, and 3) explore the relationship between early season conversation similarity and later perceived relationship formation. We found high pairwise participant response similarity across two relational subtypes (friendship, rivalry), distinct associations between relational judgments and linguistic features, including semantic similarity, sentiment, and clout, and no evidence of an association between early conversation similarity and later friendship inference. These findings suggest that naturalistic conversational content is both a potential mechanism of social-relational inference and a promising avenue for future research.</p>
-</div>
-
-<script>
-  function toggleAbstractSurvivor() {
-    var abstractDiv = document.getElementById('abstractSurvivor');
-    // Toggle the display property between 'none' and 'block'
-    if (abstractDiv.style.display === 'none' || abstractDiv.style.display === '') {
-      abstractDiv.style.display = 'block';
-    } else {
-      abstractDiv.style.display = 'none';
-    }
-  }
-</script>
-
-<br>
-
-<!-- LANGUAGE FRIGHT NIGHT -->
-<font size="5">
-  <strong>Linguistic properties of memory expression differentially relate to accuracy, specificity, and perceived veracity</strong> 
-</font>  
-<font size="3">
-  Steven A. Martinez, Kate Cliver, William J. Mitchell, <strong>Helen Schmidt</strong>, Virginia Ulichney, Chelsea Helion, Jason Chein, & Vishnu Murty  
-  2025 &nbsp;&bull;&nbsp; <i>Psychonomic Bulletin & Review</i> <br><br>
-</font>
-  <a href="https://doi.org/10.3758/s13423-025-02667-9" style="text-decoration:none" class="btn btn-outline-success btn-sm">paper</a> &nbsp; 
-  <a href="https://osf.io/fua6y/?view_only=0d1d22fdfe484fc6a10180f8157c2909"  style="text-decoration:none" class="btn btn-outline-success btn-sm">data + code</a> &nbsp;
-  <button onclick="toggleAbstractFNLanguage()" style="text-decoration:none" class="btn btn-outline-success btn-sm">abstract</button>
-</font>
-
-<div id="abstractFNLanguage" style="display:none; margin-top: 10px; font-size: 14px;">
-  <p><strong>Abstract:</strong> When communicating our memories to others, we use specific language to represent and express those memories. However, whether the linguistic properties associated with memory expression, such as communication styles, relate to memory accuracy and specificity, and how threat affects these relationships, is unclear. Further, whether communication styles influence how others perceive memories is unknown. In Experiment 1, participants (n = 55) recalled a visit to an in-person haunted house, which included low- and high-threat segments. We examined how two distinct features of memory, episodic specificity and temporal-order accuracy, related to linguistic markers of genuineness (i.e., Authenticity) and formality (i.e., Analytical Thinking) during free recall. Results revealed that Authenticity and Analytical Thinking were both elevated when recalling high- versus low-threat memories. However, memory communication styles related to episodic specificity and temporal-order accuracy differentially. Increased recollection of episodic details was negatively related to Authenticity, but positively related to Analytical Thinking. Temporal-order accuracy was positively related to Authenticity, but unrelated to Analytical Thinking. In Experiment 2, naïve readers (n = 499) read pairs of haunted-house recollections given by participants in Experiment 1 and indicated which memory they perceived as more accurate. Results showed that greater Analytical Thinking and greater episodic specificity during free recall increased perceptions of accuracy; whereas Authenticity during free recall and temporal-order memory did not influence perceptions of accuracy. Together, these findings highlight the relationship between communication styles and distinct features of memory, and how memory expression can influence others’ perceptions of communicated memories.</p>
-</div>
-
-<script>
-  function toggleAbstractFNLanguage() {
-    var abstractDiv = document.getElementById('abstractFNLanguage');
-    // Toggle the display property between 'none' and 'block'
-    if (abstractDiv.style.display === 'none' || abstractDiv.style.display === '') {
-      abstractDiv.style.display = 'block';
-    } else {
-      abstractDiv.style.display = 'none';
-    }
-  }
-</script>
-
-<br>
-
-<!-- FRIGHT NIGHT -->
-<font size="5">
-  <strong>Emotion regulation strategy use and forecasting in response to dynamic, multimodal stimuli</strong> 
-</font>  
-<font size="3">
-  William J. Mitchell, Joanne Stasiak, Steven A. Martinez, Katelyn G. Cliver, David F. Gregory, Samantha S. Reisman, <strong>Helen Schmidt</strong>, Vishnu P. Murty, & Chelsea Helion   
-  2025 &nbsp;&bull;&nbsp; <i>Journal of Experimental Psychology: General</i> <br><br>
-</font>
-  <a href="https://psycnet.apa.org/record/2025-69231-001" style="text-decoration:none" class="btn btn-outline-success btn-sm">paper</a> &nbsp; 
-  <a href="https://osf.io/j5sku/?view_only=89d87669e7674096819c439ca109c483"  style="text-decoration:none" class="btn btn-outline-success btn-sm">data + code</a> &nbsp;
-  <button onclick="toggleAbstractFN()" style="text-decoration:none" class="btn btn-outline-success btn-sm">abstract</button>
-</font>
-
-<div id="abstractFN" style="display:none; margin-top: 10px; font-size: 14px;">
-  <p><strong>Abstract:</strong> Successful emotion regulation (ER) requires effective strategy selection. Research suggests that disengagement strategies (e.g., distraction) are more often selected than engagement strategies (e.g., reappraisal) as emotional experiences intensify. However, the extent to which ER strategy choice in controlled circumstances reflects strategy usage during complex, multimodal events is not well understood. The present research uses dynamic, multimodal stimuli (i.e., a haunted house, horror movies) to examine the association between affective intensity and regulatory strategy usage among untrained participants—individuals given no prior regulation instructions or direction. Both a preliminary study (n = 54) and Study 1 (n = 118) failed to find relationships between emotional intensity and strategy usage to downregulate emotions as participants navigated a haunted house. Distraction was self-reported to be less successful than reappraisal at high intensities, contrary to expectations. Participants in Study 2 (n = 152) forecasted regulation strategy usage based upon descriptions of emotionally regulated experiences from the preliminary haunted house study. Affective intensity predicted which strategies forecasters predicted they would use; though, forecasters overpredicted how often distraction was used in practice. Study 3 (n = 242) incorporated strategy usage and forecasting within the same design by showing untrained participants video stimuli of varying intensity and capturing their regulatory responses. Forecasters again predicted using distraction more often than strategy users did in practice. Forecasters also overpredicted how effectively distraction reduced negative affective intensity relative to what strategy users reported. These results may highlight a disconnect between strategy fittedness when self-regulation occurs in uncontrolled, highly intense, or complex circumstances.</p>
-</div>
-
-<script>
-  function toggleAbstractFN() {
-    var abstractDiv = document.getElementById('abstractFN');
-    // Toggle the display property between 'none' and 'block'
-    if (abstractDiv.style.display === 'none' || abstractDiv.style.display === '') {
-      abstractDiv.style.display = 'block';
-    } else {
-      abstractDiv.style.display = 'none';
-    }
-  }
-</script>
-
-<br>
-
-<!-- NEUROCONOMICS CHAPTER -->
-<font size="5">
-  <strong>Integrated Neural Circuitry Supporting Emotion Regulation and<br>Decision Making</strong> 
-</font>  
-<font size="3">
-  <strong>Helen Schmidt</strong> & Chelsea Helion  
-  2025 &nbsp;&bull;&nbsp; Forthcoming chapter in <i>Neuroeconomics: Core Topics and Current Directions</i> <br><br>
-</font>
-  <a href="https://osf.io/preprints/psyarxiv/adf3w" style="text-decoration:none" class="btn btn-outline-success btn-sm">pre-print</a> &nbsp; 
-  <button onclick="toggleAbstractNeuroEcon()" style="text-decoration:none" class="btn btn-outline-success btn-sm">abstract</button>
-</font>
-
-<div id="abstractNeuroEcon" style="display:none; margin-top: 10px; font-size: 14px;">
-  <p><strong>Abstract:</strong> Recent research in psychology and neuroscience has begun to closely examine the relationship between emotion regulation and decision making. Emotion regulation strategies allow people to change their thoughts and feelings during emotional situations and events. Successful regulation can be particularly important for a variety of decisions made in day-to-day life. This is especially true for decisions involving risk and reward, where highly rewarding and desirable outcomes are often paired with uncertainty in the likelihood of those outcomes. In this chapter, we aim to operationalize both emotion regulation and decision making in the context of recent findings across psychology and neuroscience. We use an everyday, real-world example involving risk and reward to highlight the relationship between these processes behaviorally and neurocognitively. After presenting a framework, we layer in relevant findings in cognitive neuroscience to explore how the human brain supports these processes, both individually and in an integrated capacity. Finally, we highlight future research implications and open questions in the space.</p>
-</div>
-
-<script>
-  function toggleAbstractNeuroEcon() {
-    var abstractDiv = document.getElementById('abstractNeuroEcon');
-    // Toggle the display property between 'none' and 'block'
-    if (abstractDiv.style.display === 'none' || abstractDiv.style.display === '') {
-      abstractDiv.style.display = 'block';
-    } else {
-      abstractDiv.style.display = 'none';
-    }
-  }
-</script>
-
-<br>
-
-<!-- STORYTELLING -->
-<font size="5">
-  <strong>Storytelling changes the content and perceived value of event memories</strong> 
-</font>  
-<font size="3">
-  Devlin Eckardt, Chelsea Helion, <strong>Helen Schmidt</strong>, Janice Chen, & Vishnu P. Murty  
-  2024 &nbsp;&bull;&nbsp; <i>Cognition</i> <br><br>
-</font>
-  <a href="https://www.sciencedirect.com/science/article/abs/pii/S0010027724001707" style="text-decoration:none" class="btn btn-outline-success btn-sm">paper</a> &nbsp; 
-  <a href="https://osf.io/puyf4/"  style="text-decoration:none" class="btn btn-outline-success btn-sm">data + code</a> &nbsp;
-  <button onclick="toggleAbstractStory()" style="text-decoration:none" class="btn btn-outline-success btn-sm">abstract</button>
-</font>
-
-<div id="abstractStory" style="display:none; margin-top: 10px; font-size: 14px;">
-  <p><strong>Abstract:</strong> Memories are not only stored for personal recall, but also to communicate knowledge to others in service of adaptive decision-making. Prior research shows that goals to share information can change which content is communicated in memory as well as the linguistic style embedded in this communication. Yet, little is known as to how communication-related alterations in memory narration drive differences of value processing in listeners. Here, we test how memory communication alters multi-featural recall for complex events and the downstream consequence on value estimations in naïve listeners. Participants recalled a memory of playing an exploratory videogame at a 24-h delay under instructions to either share (i.e., social condition) or recall (i.e., control condition) their memory. Sharing goals systematically altered the content and linguistic style of recall, such that narrators from the social condition were biased towards recall of non-episodic details and communicated their memories with more clout, less formality, and less authenticity. Across two independent samples of naïve listeners, these features differentially influenced value estimations of the video game. We found that greater clout was associated with greater enjoyment while listening to memories (hedonic value), and that greater inclusion of non-episodic details resulted in greater willingness to purchase the video game (motivational drive). These findings indicate that sharing an experience as a story can change the content and linguistic tone of memory recall, which in turn shape perceived value in naïve listeners.</p>
-</div>
-
-<script>
-  function toggleAbstractStory() {
-    var abstractDiv = document.getElementById('abstractStory');
-    // Toggle the display property between 'none' and 'block'
-    if (abstractDiv.style.display === 'none' || abstractDiv.style.display === '') {
-      abstractDiv.style.display = 'block';
-    } else {
-      abstractDiv.style.display = 'none';
-    }
-  }
-</script>
-
-<br>
-
-<!-- MIDUS -->
-<font size="5">
-  <strong>Perceived Relational Support Is Associated With Everyday Positive, But Not Negative, Affectivity in a U.S. Sample</strong> 
-</font>  
-<font size="3">
-  Virginia Ulichney, <strong>Helen Schmidt</strong>, & Chelsea Helion   
-  2024 &nbsp;&bull;&nbsp; <i>Personality and Social Psychology Bulletin</i> <br><br>
-</font>
-  <a href="https://journals.sagepub.com/doi/10.1177/01461672231224991" style="text-decoration:none" class="btn btn-outline-success btn-sm">paper</a> &nbsp; 
-  <a href="https://osf.io/f4kav/"  style="text-decoration:none" class="btn btn-outline-success btn-sm">data + code</a> &nbsp;
-  <button onclick="toggleAbstractMIDUS()" style="text-decoration:none" class="btn btn-outline-success btn-sm">abstract</button>
-</font>
-
-<div id="abstractMIDUS" style="display:none; margin-top: 10px; font-size: 14px;">
-  <p><strong>Abstract:</strong> Research suggests that perceived social support bolsters emotional well-being. We tested whether perceived support from friends, family, and spouses/partners was associated with reduced negative and greater positive affectivity (i.e., everyday affective baseline), and whether perceived strain in these relationships had opposite effects, accounting for age and relevant covariates. Using data from the third waves of the Midlife in the United States survey and National Study of Daily Experience (n = 1,124), we found negative affectivity was not tied to relational support nor strain, but instead was associated positively with neuroticism and negatively with conscientiousness. In contrast, positive affectivity was related positively to support from friends and family, conscientiousness, and extroversion, and negatively to strain among partners and neuroticism. Exploratory analyses within second-wave Midlife in Japan data (n = 657) suggest patterns for future cross-cultural study. Some relationship dynamics may vary, but perceived support might enhance emotional well-being by bolstering positive, rather than mitigating negative, emotionality.</p>
-</div>
-
-<script>
-  function toggleAbstractMIDUS() {
-    var abstractDiv = document.getElementById('abstractMIDUS');
-    // Toggle the display property between 'none' and 'block'
-    if (abstractDiv.style.display === 'none' || abstractDiv.style.display === '') {
-      abstractDiv.style.display = 'block';
-    } else {
-      abstractDiv.style.display = 'none';
-    }
-  }
-</script>
-
-<br>
-
-## Under Review / In Preparation
-<font size="2">*^#^ denotes equal contribution*</font>
-
-<!-- CONVERSATION STRUCTURES -->
-<font size="5">
-  <strong>Dynamics of topic exploration in conversation</strong> 
-</font>  
-<font size="3">
-  <strong>Helen Schmidt</strong>, Claire Augusta Bergey, Changyi Zhou, Chelsea Helion, & Robert D. Hawkins   
-  in prep &nbsp;&bull;&nbsp; <i>PsyArXiv</i> <br><br>
-</font>
-  <a href="https://osf.io/preprints/psyarxiv/69yw2_v1" style="text-decoration:none" class="btn btn-outline-success btn-sm">pre-print</a> &nbsp;
-  <button onclick="toggleAbstractCS()" style="text-decoration:none" class="btn btn-outline-success btn-sm">abstract</button>
-</font>
-
-<div id="abstractCS" style="display:none; margin-top: 10px; font-size: 14px;">
-  <p><strong>Abstract:</strong> Conversations are intricately structured forms of social interaction, containing interconnected topics with nested levels of semantic specificity. What principles govern how we move through this vast topic space with social partners? To characterize these dynamics, we introduce a dataset of annotated topic shifts from 1505 annotators on 200 transcripts (transcribed video call conversations between strangers; Reece et al., 2023). Conversational dyads had fairly stochastic transitions between topics, with loose systematicity (e.g., talk of preferences was often followed by talk of location). Examining trajectories within each topic, we find that dyads are initially concentrated in semantic space before spreading out to dispersed regions as topics progress. This pattern holds over entire conversations, providing quantitative evidence that conversations have nested levels of increasing idiosyncrasy: conversations and topics often start similarly, but disperse over time. Overall, our findings provide evidence that interlocutors explore conceptual space systematically, giving layered structure to idle talk.</p>
-</div>
-
-<script>
-  function toggleAbstractCS() {
-    var abstractDiv = document.getElementById('abstractCS');
-    // Toggle the display property between 'none' and 'block'
-    if (abstractDiv.style.display === 'none' || abstractDiv.style.display === '') {
-      abstractDiv.style.display = 'block';
-    } else {
-      abstractDiv.style.display = 'none';
-    }
-  }
-</script>
-
-<br>
-
-<!-- SHARED REALITY -->
-<font size="5">
-  <strong>When and why does shared reality generalize?</strong> 
-</font>  
-<font size="3">
-  Wasita Mahaphanit^#^, Christopher L. Welker^#^, <strong>Helen Schmidt</strong>, Luke J. Chang, & Robert D. Hawkins   
-  in prep &nbsp;&bull;&nbsp; <i>PsyArXiv</i> <br><br>
-</font>
-  <a href="https://osf.io/preprints/psyarxiv/g9p3e" style="text-decoration:none" class="btn btn-outline-success btn-sm">pre-print</a> &nbsp; 
-  <button onclick="toggleAbstractSR()" style="text-decoration:none" class="btn btn-outline-success btn-sm">abstract</button>
-</font>
-
-<div id="abstractSR" style="display:none; margin-top: 10px; font-size: 14px;">
-  <p><strong>Abstract:</strong> Inspired by inductive reasoning models, we test whether generalized shared reality (i.e., the sense of being on the same page) arises through probabilistic inference about latent commonalities. Using a naturalistic text-based chat paradigm, we manipulated whether conversation partners discussed a belief they shared, a belief on which their opinions differed, or a random prompt. Participants discussing shared opinions reported experiencing greater shared reality compared to those discussing differences or random topics. Moreover, participants who made broader inferences about additional beliefs they might share with their partners also reported greater shared  reality. While discussing shared opinions can induce an overall greater sense of shared reality, participants discussing differences leveraged their conversation to establish shared realities about other topics. We  demonstrate that shared reality can emerge in multiple ways during initial interactions, establishing a foundation for future mechanistic investigations within an inductive inference framework.</p>
-</div>
-
-<script>
-  function toggleAbstractSR() {
-    var abstractDiv = document.getElementById('abstractSR');
-    // Toggle the display property between 'none' and 'block'
-    if (abstractDiv.style.display === 'none' || abstractDiv.style.display === '') {
-      abstractDiv.style.display = 'block';
-    } else {
-      abstractDiv.style.display = 'none';
-    }
-  }
-</script>
+```
 
 
 

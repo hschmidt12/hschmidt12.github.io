@@ -21,10 +21,10 @@ The Application Statement Feedback Program is a volunteer-driven program to help
 ::: {layout="[1, 3]" layout-valign="center"}
 ![](./images/COG.png){width="150px"}
 
-The Coding Outreach Group at Temple hosts annual coding bootcamps for beginners, hands-on workshops for intermediate to advanced coders, and regular office hours for people of all coding levels to find solutions to coding problems. Our educational materials are free and publicly available so individuals within and outside of the Temple community can learn at their own pace. Click [here](https://github.com/TU-Coding-Outreach-Group/cog_summer_workshops_2023/blob/master/README.md){style="text-decoration:none"} for more information about our most recent (2023) summer workshop series. A full repository of all materials and tutorials can be found on our [GitHub](https://github.com/TU-Coding-Outreach-Group){style="text-decoration:none"}. 
+The Coding Outreach Group at Temple hosts annual coding bootcamps for beginners, hands-on workshops for intermediate to advanced coders, and regular office hours for people of all coding levels to find solutions to coding problems. Our educational materials are free and publicly available so individuals within and outside of the Temple community can learn at their own pace. Click [here](https://github.com/TU-Coding-Outreach-Group/intro-to-coding-2025){style="text-decoration:none"} for more information about our most recent (2025) introduction to coding workshop series. A full repository of all materials and tutorials can be found on our [GitHub](https://github.com/TU-Coding-Outreach-Group){style="text-decoration:none"}. 
 :::
 
-## Additional resources for applying to PhD programs in psychology
+## Applying to PhD programs in psychology / neuroscience
 
 -   ["How applying to graduate school works"](https://www.sokolhessnerlab.com/howapplyingworks){style="text-decoration:none"} - *the Sokol-Hessner Lab, University of Denver*
 -   [Harvard Psychology's PhD Resources and Online Tips](https://psychology.fas.harvard.edu/pro-tip){style="text-decoration:none"} 

@@ -1,0 +1,99 @@
+/* css styles */
+
+/* wrapper for all entries in the same year */
+.year-group {
+  display: flex;
+  align-items: flex-start;
+}
+
+.paper-year {
+  width: 100px;
+  color: #6c757d;
+  font-weight: 600;
+  font-size: 1rem;
+  flex-shrink: 0;
+  padding-right: 1rem;
+
+  position: sticky;
+  align-self: flex-start;      
+  background-color: #fff;
+  z-index: 1;
+
+  margin-top: 0;             
+}
+
+/* right-hand column: list of entries */
+.year-papers {
+  flex-grow: 1;
+}
+
+.year-papers .paper-row:first-child {
+  padding-top: 0;
+}
+
+.year-papers .paper-row:first-child .paper-title {
+  margin-top: 0;
+}
+
+/* remove extra top space from the first year group */
+.year-group:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.year-papers .paper-row:first-child {
+  padding-top: 0;
+}
+
+.year-papers .paper-row:first-child .paper-title {
+  margin-top: 0;
+}
+
+.paper-row {
+  padding: 1rem 0;
+  border-bottom: 1px solid #dee2e6;
+}
+
+/* remove border from last citation in each year group */
+.year-papers .paper-row:last-child {
+  border-bottom: none;
+}
+
+/* full-width divider below the entire year group */
+.year-divider {
+  border-bottom: 1px solid #dee2e6;
+  margin: 0 0 1rem 0;
+  width: 100%;
+}
+
+.paper-info {
+  flex-grow: 1.5;
+}
+
+.paper-title {
+  font-size: 1.0rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.paper-ref {
+  font-size: 0.72rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.paper-link {
+  text-decoration: none;
+}
+
+.abstract-text {
+  margin-top: 10px;
+  font-size: 0.7rem;
+  line-height: 1.5;
+  color: #444; /* Optional: slightly softer text */
+}
+
+.icon-link {
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
+}

@@ -5,25 +5,26 @@ about:
   template: trestles
   image-width: 250px
   links: 
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/helenschmidt1/
     - icon: envelope
       text: Email
       href: mailto:helen_schmidt@temple.edu
     - icon: paperclip
       text: CV
       href: files/Schmidt-CV.pdf
-    - icon: github
-      text: GitHub
-      href: https://github.com/hschmidt12
     - icon: mortarboard
       text: Google Scholar
       href: https://scholar.google.com/citations?user=Iw0DI-IAAAAJ
-    - icon: linkedin
-      text: LinkedIn
-      href: https://www.linkedin.com/in/helenschmidt1/
+    - icon: github
+      text: GitHub
+      href: https://github.com/hschmidt12
 format: 
   html:
     link-external-newwindow: true     
 ---
+<p style="font-size: 1.0rem;">
 Hi, I'm Helen!
 
 I'm a psychology Ph.D. candidate in the [Social and Affective Neuroscience Lab](https://sites.temple.edu/sanlab/){style="text-decoration:none"} at Temple University, specializing in quantitative methods. I study social and affective cognition by employing a multimodal analytic approach that combines behavioral experimentation and neuroimaging with machine learning and computational modeling. My research is supported by an [NIH F31 fellowship](https://reporter.nih.gov/search/C795pE3Bw0q0iAW3MhQSsw/project-details/10899008){style="text-decoration:none"} from the National Heart, Lung, and Blood Institute.
@@ -31,3 +32,4 @@ I'm a psychology Ph.D. candidate in the [Social and Affective Neuroscience Lab](
 I have a bachelor of science in biology from Tufts University and a master of science in clinical neuroscience from University College London. 
 
 Outside of the lab, I can be found reading books, traveling, drinking coffee, and spending time outside. I'm also a big data viz enthusiast - you can find some of my recent projects in my [portfolio](portfolio.qmd){style="text-decoration:none"}.
+</p>

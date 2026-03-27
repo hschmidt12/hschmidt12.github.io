@@ -12,8 +12,8 @@ about:
       text: Email
       href: mailto:helen_schmidt@temple.edu
     - icon: paperclip
-      text: CV
-      href: files/Schmidt-CV.pdf
+      text: Resume
+      href: files/Schmidt-Resume.pdf
     - icon: mortarboard
       text: Google Scholar
       href: https://scholar.google.com/citations?user=Iw0DI-IAAAAJ

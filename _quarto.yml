@@ -19,7 +19,7 @@ website:
       - href: resources.qmd
         text: Resources
       - href: files/Schmidt-CV.pdf
-        text: CV
+        text: Academic CV
 
 format:
   html:
